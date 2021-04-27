@@ -52,13 +52,19 @@ ui <- navbarPage(
     sidebarLayout(
       sidebarPanel(
         selectizeInput(inputId = "state"
-                       , label = "Choose a state to examine:"
+                       , label = "Choose a state:"
                        , choices = state_choice
+                       , selected = "Alabama"
+                       , multiple = FALSE,
+                       
+                       inputId2 = "candidate"
+                       , label = "Choose a candidate:"
+                       , choices = candidate_choice
                        , selected = "Alabama"
                        , multiple = FALSE)
       ),
       mainPanel(
-        plotOutput(outputId = "scatter")
+        plotOutput(outputId = "map")
       )
     )
   )
@@ -73,25 +79,15 @@ server <- function(input,output){
   output$map <- renderPlot({
     voting_rates %>%
       filter(state == input$state)  %>%
-      ggplot(aes_string(x= "year", y="voting_rate", size = input$pt_size)) +
-      geom_point(color = "#2c7fb8", size = 3) + 
-      ylim(30, 85) +
-      labs(x = "Year", y = "Voting Eligible Population (VEP) Turnout Rate"
-           , title = "Voting Turnout over Time") +
-      geom_label_repel(data = filter(voting_rates, state %in% input$id_name)
-                       , aes(label = state), show.legend = FALSE) +
-      scale_x_discrete(limits=c(1980,1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016, 2020))
-  
-  # Map
-    ggplot(contributions_map, aes(x = long, y = lat, group = group,
-                                  fill = bloomberg_michael_r)) +
+      filter(candidate = input$candidate) %>%
+      ggplot(contributions_map, aes(x = long, y = lat, group = group,
+                                    fill = candidate_choice)) +
       geom_polygon(color = "white") +
       theme_void() +
       coord_fixed(ratio = 1.3) +
       labs(fill = "Individual Contributions for Michael Bloomberg") +
       theme(legend.position="bottom") +
       scale_fill_distiller(palette = "BuPu", direction = "horizantle")
-    
     })
 }
 

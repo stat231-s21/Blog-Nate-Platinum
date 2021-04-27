@@ -1,9 +1,9 @@
 ---
-title: "Your Project Title Here"
-author: "Your Names Here"
-date: "Add a date"
+title: "Presidential Election Campaign Finance"
+author: "Sarah Edelson, Matthew Perkins, Seamus Lawton"
+date: "April 27, 2021"
 output:
-  rmdformats::readthedown:
+  rmdformats::readthedown:s
     thumbnails: false
     highlight: NULL
 ---

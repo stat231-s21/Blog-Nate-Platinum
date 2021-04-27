@@ -35,15 +35,4 @@ contributions_map <- individual_contributions %>%
   left_join(state_info, by = "State") %>%
   right_join(usa_states, by = c("state_full" = "region"))
 
-ggplot(contributions_map, aes(x = long, y = lat, group = group,
-                              fill = bloomberg_michael_r)) +
-  geom_polygon(color = "white") +
-  theme_void() +
-  coord_fixed(ratio = 1.3) +
-  labs(fill = "Individual Contributions for Michael Bloomberg") +
-  theme(legend.position="bottom") +
-  scale_fill_distiller(palette = "BuPu", direction = "horizantle")
-
-
-
 ```

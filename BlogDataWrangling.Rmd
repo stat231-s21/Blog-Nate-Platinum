@@ -21,8 +21,8 @@ library(gapminder)
 individual_contributions <- read_csv(here("Data", "IndividualContributions.csv"))
 
 individual_contributions <- individual_contributions %>%
-  janitor::clean_names() %>%
-  mutate(State = state)
+  pivot_longer(!State, names_to = "Candidate", values_to = "Contribution")
+  
 
 
 state_info <- data.frame(state_full = tolower(state.name) , State = state.abb,

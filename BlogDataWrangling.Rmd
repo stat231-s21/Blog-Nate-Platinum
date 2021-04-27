@@ -1,0 +1,16 @@
+---
+title: "Blog Data Wrangling - Sarah Edelson, Matthew Perkins, Seamus Lawton"
+output: pdf_document
+---
+
+```{r}
+# Loading Packages
+library(dplyr)
+library(tidyverse)
+library(rvest)
+library(here)
+library(readr)
+```
+
+```{r}
+# Reading in

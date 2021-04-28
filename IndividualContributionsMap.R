@@ -77,7 +77,7 @@ server <- function(input,output){
   
   # INTERACTIVE SCATTERPLOT showing voting rates over time for each state
   output$map <- renderPlot({
-    voting_rates %>%
+    contributions_map %>%
       filter(state == input$state)  %>%
       filter(candidate = input$candidate) %>%
       ggplot(contributions_map, aes(x = long, y = lat, group = group,

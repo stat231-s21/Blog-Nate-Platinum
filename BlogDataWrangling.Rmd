@@ -52,6 +52,7 @@ g_expenditures <- graph_from_data_frame(independent_expenditures_large, directed
 
 expenditures_network <- ggnetwork(g_expenditures)
 
+# make color support or oppose
 ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_edges(arrow=arrow(type="closed", length=unit(6,"pt")), color = "lightgray",
   aes(size = total)) + geom_nodes() +

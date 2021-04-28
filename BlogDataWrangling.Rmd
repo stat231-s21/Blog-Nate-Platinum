@@ -14,6 +14,7 @@ library(ggnetwork)
 library(datasets)
 library(mdsr)
 library(gapminder)
+library(igraph)
 ```
 
 ```{r}
@@ -42,13 +43,19 @@ contributions_map <- individual_contributions %>%
 # Create Network for independent expenditures
 independent_expenditures <- read_csv(here("Data", "IndependentExpenditures.csv"))
 
-g_expenditures <- graph_from_data_frame(independent_expenditures, directed = TRUE)
+independent_expenditures_large <- independent_expenditures %>%
+  select(committee_name, candidate_name, total, support_oppose_indicator) %>%
+  filter(total >= 2000000)  %>%
+  filter(candidate_name == "TRUMP, DONALD J" | candidate_name == "BIDEN, JOSEPH R JR")
 
-expenditures_networtk <- ggnetwork(g_expenditures)
+g_expenditures <- graph_from_data_frame(independent_expenditures_large, directed = TRUE)
 
-ggplot(data = expenditures_netwoork, aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_edges(arrow=arrow(type="closed", length=unit(6,"pt")) , color = "lightgray",
+expenditures_network <- ggnetwork(g_expenditures)
+
+ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_edges(arrow=arrow(type="closed", length=unit(6,"pt")), color = support_oppose_indicator,
   aes(size = total)) + geom_nodes() +
-  geom_nodelabel(aes(label = name)) + theme_blank()
+  geom_nodelabel(aes(label = name)) +
+  theme_blank()
 
 ```

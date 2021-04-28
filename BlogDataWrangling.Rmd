@@ -45,7 +45,7 @@ independent_expenditures <- read_csv(here("Data", "IndependentExpenditures.csv")
 
 independent_expenditures_large <- independent_expenditures %>%
   select(committee_name, candidate_name, total, support_oppose_indicator) %>%
-  filter(total >= 2000000)  %>%
+  filter(total >= 5000000)  %>%
   filter(candidate_name == "TRUMP, DONALD J" | candidate_name == "BIDEN, JOSEPH R JR")
 
 g_expenditures <- graph_from_data_frame(independent_expenditures_large, directed = TRUE)
@@ -53,9 +53,9 @@ g_expenditures <- graph_from_data_frame(independent_expenditures_large, directed
 expenditures_network <- ggnetwork(g_expenditures)
 
 ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_edges(arrow=arrow(type="closed", length=unit(6,"pt")), color = support_oppose_indicator,
+  geom_edges(arrow=arrow(type="closed", length=unit(6,"pt")), color = "lightgray",
   aes(size = total)) + geom_nodes() +
-  geom_nodelabel(aes(label = name)) +
+  geom_nodelabel(aes(label = name), size = 3) +
   theme_blank()
 
 ```

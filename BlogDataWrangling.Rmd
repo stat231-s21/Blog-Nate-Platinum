@@ -10,7 +10,7 @@ library(tidyverse)
 library(rvest)
 library(here)
 library(readr)
-
+library(ggnetwork)
 library(datasets)
 library(mdsr)
 library(gapminder)
@@ -34,5 +34,21 @@ usa_states <- map_data(map = "state"
 contributions_map <- individual_contributions %>%
   left_join(state_info, by = "State") %>%
   right_join(usa_states, by = c("state_full" = "region"))
+
+```
+
+
+```{r}
+# Create Network for independent expenditures
+independent_expenditures <- read_csv(here("Data", "IndependentExpenditures.csv"))
+
+g_expenditures <- graph_from_data_frame(independent_expenditures, directed = TRUE)
+
+expenditures_networtk <- ggnetwork(g_expenditures)
+
+ggplot(data = expenditures_netwoork, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_edges(arrow=arrow(type="closed", length=unit(6,"pt")) , color = "lightgray",
+  aes(size = total)) + geom_nodes() +
+  geom_nodelabel(aes(label = name)) + theme_blank()
 
 ```

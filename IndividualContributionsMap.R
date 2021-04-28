@@ -58,10 +58,10 @@ ui <- navbarPage(
                        , multiple = FALSE,
                        
                        inputId2 = "candidate"
-                       , label = "Choose a candidate:"
-                       , choices = candidate_choice
-                       , selected = "Alabama"
-                       , multiple = FALSE)
+                       , label2 = "Choose a candidate:"
+                       , choices2 = candidate_choice
+                       , selected2 = "BIDEN, JOSEPH R JR"
+                       , multiple2 = FALSE)
       ),
       mainPanel(
         plotOutput(outputId = "map")

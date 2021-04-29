@@ -18,7 +18,7 @@ library(igraph)
 ```
 
 ```{r}
-# Create Individual Contributions Map
+# Create Individual Contributions Shiny Map
 individual_contributions <- read_csv(here("Data", "IndividualContributions.csv"))
 
 individual_contributions <- individual_contributions %>%
@@ -32,14 +32,18 @@ individual_contributions <- individual_contributions %>%
   filter(State != "MP")  %>%
   filter(State != "OT")  %>%
   filter(State != "PR")  %>%
-  mutate(Candidate_Cleaned = (case_when(
-         str_detect(candidate, "BIDEN, JOSEPH R JR") ~ "Joe Biden",
-         str_detect(candidate, "BLOOMBERG, MICHAEL R.") ~ "Michael Bloomberg",
-         str_detect(candidate, "HARRIS, KAMALA D.") ~ "Kamala Harris",
-         str_detect(candidate, "KLOBUCHAR, AMY J.") ~ "Amy Klobuchar",
-         str_detect(candidate, "SANDERS, BERNARD") ~ "Bernie Sanders",
-         str_detect(candidate, "STEYER, TOM") ~ "Tom Steyer"
+  mutate(candidate_cleaned = (case_when(
+         str_detect(Candidate, "BIDEN, JOSEPH R JR") ~ "Joe Biden",
+         str_detect(Candidate, "BLOOMBERG, MICHAEL R.") ~ "Michael Bloomberg",
+         str_detect(Candidate, "HARRIS, KAMALA D.") ~ "Kamala Harris",
+         str_detect(Candidate, "KLOBUCHAR, AMY J.") ~ "Amy Klobuchar",
+         str_detect(Candidate, "SANDERS, BERNARD") ~ "Bernie Sanders",
+         str_detect(Candidate, "STEYER, TOM") ~ "Tom Steyer",
+         str_detect(Candidate, "TRUMP, DONALD J.") ~ "Donald Trump",
+         str_detect(Candidate, "WARREN, ELIZABETH") ~ "Elizabeth Warren",
+         str_detect(Candidate, "YANG, ANDREW MR.") ~ "Andrew Yang"
          )))
+  
 
 state_info <- data.frame(state_full = tolower(state.name) , State = state.abb,
                          Region = state.region)
@@ -50,7 +54,6 @@ usa_states <- map_data(map = "state"
 contributions_map <- individual_contributions %>%
   left_join(state_info, by = "State") %>%
   right_join(usa_states, by = c("state_full" = "region"))
-
 ```
 
 

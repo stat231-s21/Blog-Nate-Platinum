@@ -22,15 +22,30 @@ library(igraph)
 individual_contributions <- read_csv(here("Data", "IndividualContributions.csv"))
 
 individual_contributions <- individual_contributions %>%
-  pivot_longer(!State, names_to = "Candidate", values_to = "Contribution")
-  
-
+  pivot_longer(!State, names_to = "Candidate", values_to = "Contribution") %>%
+  filter(State != "ZZ") %>%
+  filter(State != "AA") %>%
+  filter(State != "AE")  %>%
+  filter(State != "AP")  %>%
+  filter(State != "AS")  %>%
+  filter(State != "GU")  %>%
+  filter(State != "MP")  %>%
+  filter(State != "OT")  %>%
+  filter(State != "PR")  %>%
+  mutate(Candidate_Cleaned = (case_when(
+         str_detect(candidate, "BIDEN, JOSEPH R JR") ~ "Joe Biden",
+         str_detect(candidate, "BLOOMBERG, MICHAEL R.") ~ "Michael Bloomberg",
+         str_detect(candidate, "HARRIS, KAMALA D.") ~ "Kamala Harris",
+         str_detect(candidate, "KLOBUCHAR, AMY J.") ~ "Amy Klobuchar",
+         str_detect(candidate, "SANDERS, BERNARD") ~ "Bernie Sanders",
+         str_detect(candidate, "STEYER, TOM") ~ "Tom Steyer"
+         )))
 
 state_info <- data.frame(state_full = tolower(state.name) , State = state.abb,
                          Region = state.region)
 
 usa_states <- map_data(map = "state"
-, region = ".")
+                       , region = ".")
 
 contributions_map <- individual_contributions %>%
   left_join(state_info, by = "State") %>%
@@ -52,11 +67,13 @@ g_expenditures <- graph_from_data_frame(independent_expenditures_large, directed
 
 expenditures_network <- ggnetwork(g_expenditures)
 
-# make color support or oppose
+# Color by support or oppose
 ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_edges(arrow=arrow(type="closed", length=unit(6,"pt")),
+  geom_edges(arrow=arrow(type="closed", length=unit(2,"pt")),
   aes(size = total, color = support_oppose_indicator)) + geom_nodes() +
   geom_nodelabel(aes(label = name), size = 3) +
-  theme_blank()
+  theme_blank() +
+  labs(size = "Donation Size") +
+  labs(color = "Support or Oppose Candidate")
 
 ```

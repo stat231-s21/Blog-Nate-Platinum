@@ -6,6 +6,7 @@ library(shinythemes)
 library(datasets)
 library(mdsr)
 library(gapminder)
+library(dplyr)
 
 # Individual Contributions Maps for Each State
 # user can choose a state and a candidate
@@ -14,9 +15,28 @@ library(gapminder)
 individual_contributions <- read_csv(here("Data", "IndividualContributions.csv"))
 
 individual_contributions <- individual_contributions %>%
-  pivot_longer(!State, names_to = "Candidate", values_to = "Contribution")
-
-
+  pivot_longer(!State, names_to = "Candidate", values_to = "Contribution") %>%
+  filter(State != "ZZ") %>%
+  filter(State != "AA") %>%
+  filter(State != "AE")  %>%
+  filter(State != "AP")  %>%
+  filter(State != "AS")  %>%
+  filter(State != "GU")  %>%
+  filter(State != "MP")  %>%
+  filter(State != "OT")  %>%
+  filter(State != "PR")  %>%
+  mutate(candidate_cleaned = (case_when(
+         str_detect(Candidate, "BIDEN, JOSEPH R JR") ~ "Joe Biden",
+         str_detect(Candidate, "BLOOMBERG, MICHAEL R.") ~ "Michael Bloomberg",
+         str_detect(Candidate, "HARRIS, KAMALA D.") ~ "Kamala Harris",
+         str_detect(Candidate, "KLOBUCHAR, AMY J.") ~ "Amy Klobuchar",
+         str_detect(Candidate, "SANDERS, BERNARD") ~ "Bernie Sanders",
+         str_detect(Candidate, "STEYER, TOM") ~ "Tom Steyer",
+         str_detect(Candidate, "TRUMP, DONALD J.") ~ "Donald Trump",
+         str_detect(Candidate, "WARREN, ELIZABETH") ~ "Elizabeth Warren",
+         str_detect(Candidate, "YANG, ANDREW MR.") ~ "Andrew Yang"
+         )))
+  
 
 state_info <- data.frame(state_full = tolower(state.name) , State = state.abb,
                          Region = state.region)
@@ -33,8 +53,7 @@ contributions_map <- individual_contributions %>%
 ###################################################
 
 # for selectizeInput choice for State, pull directly from data
-state_choice <- unique(contributions_map$State)
-candidate_choice <- unique(contributions_map$Candidate)
+candidate_choice <- unique(contributions_map$candidate_cleaned)
 
 
 ############
@@ -44,24 +63,18 @@ ui <- navbarPage(
   
   theme = shinytheme("flatly"),
   
-  title="Presidential Election Campaign Finances",
+  title="Individual Contributions to Candidates",
   
   tabPanel(
-    title = "Individual Contributions to Candidates",
+    title = "Map",
     
     sidebarLayout(
       sidebarPanel(
-        selectizeInput(inputId = "state"
-                       , label = "Choose a state:"
-                       , choices = state_choice
-                       , selected = "Alabama"
-                       , multiple = FALSE,
-                       
-                       inputId2 = "candidate"
-                       , label2 = "Choose a candidate:"
-                       , choices2 = candidate_choice
-                       , selected2 = "BIDEN, JOSEPH R JR"
-                       , multiple2 = FALSE)
+        selectizeInput(inputId = "candidate"
+                       , label = "Choose a candidate:"
+                       , choices = candidate_choice
+                       , selected = "Joe Biden"
+                       , multiple = FALSE)
       ),
       mainPanel(
         plotOutput(outputId = "map")
@@ -75,17 +88,16 @@ ui <- navbarPage(
 ############
 server <- function(input,output){
   
-  # INTERACTIVE SCATTERPLOT showing voting rates over time for each state
+  # INTERACTIVE MAP
   output$map <- renderPlot({
     contributions_map %>%
-      filter(state == input$state)  %>%
-      filter(candidate = input$candidate) %>%
-      ggplot(contributions_map, aes(x = long, y = lat, group = group,
-                                    fill = candidate_choice)) +
+      filter(candidate_cleaned == input$candidate_cleaned) %>%
+      ggplot(aes(x = long, y = lat, group = group,
+                                    fill = Contribution)) +
       geom_polygon(color = "white") +
       theme_void() +
       coord_fixed(ratio = 1.3) +
-      labs(fill = "Individual Contributions for Michael Bloomberg") +
+      labs(fill = "Individual Contributions for Chosen Candidate") +
       theme(legend.position="bottom") +
       scale_fill_distiller(palette = "BuPu", direction = "horizantle")
     })

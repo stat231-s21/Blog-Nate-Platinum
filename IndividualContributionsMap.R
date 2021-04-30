@@ -71,10 +71,10 @@ ui <- navbarPage(
     sidebarLayout(
       sidebarPanel(
         selectizeInput(inputId = "candidate"
-                       , label = "Choose a candidate:"
+                       , label = "Choose candidate(s):"
                        , choices = candidate_choice
                        , selected = "Joe Biden"
-                       , multiple = FALSE)
+                       , multiple = TRUE)
       ),
       mainPanel(
         plotOutput(outputId = "map")
@@ -91,7 +91,7 @@ server <- function(input,output){
   # INTERACTIVE MAP
   output$map <- renderPlot({
     contributions_map %>%
-      filter(candidate_cleaned == input$candidate_cleaned) %>%
+      filter(candidate_cleaned %in% input$candidate_cleaned) %>%
       ggplot(aes(x = long, y = lat, group = group,
                                     fill = Contribution)) +
       geom_polygon(color = "white") +

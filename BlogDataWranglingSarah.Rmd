@@ -15,6 +15,8 @@ library(datasets)
 library(mdsr)
 library(gapminder)
 library(igraph)
+
+library(scales)
 ```
 
 ```{r}
@@ -95,7 +97,7 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
   geom_nodelabel(data = filter(expenditures_network, name == "Joe Biden"), aes(label = name), color = "blue", size = 2) +
   theme_blank() +
   scale_color_manual(values=c("red2", "slategray")) +
-  labs(size = "Contribution Size") +
+  labs(size = "Contribution Size", labels = comma) +
   labs(color = "Support or Oppose Candidate")
 
 ```

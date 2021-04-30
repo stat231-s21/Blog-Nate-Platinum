@@ -1,6 +1,6 @@
 ---
 title: "Title"
-author: "Names"
+author: "Sarah Edelson, Seamus Lawton, Matthew Perkins"
 date: "Date"
 output:
   rmdformats::readthedown:s

@@ -9,11 +9,12 @@ library(gapminder)
 library(dplyr)
 
 # Individual Contributions Maps for Each State
-# user can choose a state and a candidate
+# user can choose candidate(s)
 
 # data wrangling
 individual_contributions <- read_csv(here("Data", "IndividualContributions.csv"))
 
+# filtering out contributions from Armed Forces and other U.S. territories etc. that are listed as states
 individual_contributions <- individual_contributions %>%
   pivot_longer(!State, names_to = "Candidate", values_to = "Contribution") %>%
   filter(State != "ZZ") %>%
@@ -97,7 +98,7 @@ server <- function(input,output){
       geom_polygon(color = "white") +
       theme_void() +
       coord_fixed(ratio = 1.3) +
-      labs(fill = "Individual Contributions for Chosen Candidate") +
+      labs(fill = "Individual Contributions for Chosen Candidates") +
       theme(legend.position="bottom") +
       scale_fill_distiller(palette = "BuPu", direction = "horizantle")
     })

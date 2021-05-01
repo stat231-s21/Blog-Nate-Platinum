@@ -113,6 +113,17 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
 
 
 ```{r}
+# Word Cloud for candidates in the primaries
+
+
+```
+
+
+
+
+
+
+```{r}
 # Leaflet
 library(leaflet)
 

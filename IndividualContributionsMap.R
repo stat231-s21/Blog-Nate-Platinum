@@ -54,7 +54,7 @@ contributions_map <- individual_contributions %>%
 ###################################################
 
 # for selectizeInput choice for State, pull directly from data
-candidate_choice <- unique(contributions_map$candidate_cleaned)
+candidate_choice <- unique(contributions_map$candidate_cleaned)[-10]
 
 
 ############
@@ -92,10 +92,11 @@ server <- function(input,output){
   # INTERACTIVE MAP
   output$map <- renderPlot({
     contributions_map %>%
-      filter(candidate_cleaned %in% input$candidate_cleaned) %>%
+      filter(candidate_cleaned %in% input$candidate) %>%
       ggplot(aes(x = long, y = lat, group = group,
                                     fill = Contribution)) +
       geom_polygon(color = "white") +
+      facet_wrap(~candidate_cleaned) +
       theme_void() +
       coord_fixed(ratio = 1.3) +
       labs(fill = "Individual Contributions for Chosen Candidates") +

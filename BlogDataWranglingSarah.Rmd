@@ -5,6 +5,7 @@ output: pdf_document
 
 ```{r}
 # Loading Packages
+library(ggplot2)
 library(dplyr)
 library(tidyverse)
 library(rvest)
@@ -15,8 +16,11 @@ library(datasets)
 library(mdsr)
 library(gapminder)
 library(igraph)
+library(maps)
 
 library(scales)
+
+
 ```
 
 ```{r}
@@ -92,7 +96,7 @@ expenditures_network <- ggnetwork(g_expenditures) %>%
 # Color by support or oppose
 ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_edges(aes(size = total/1000000, color = support_oppose_indicator)) + geom_nodes() +
-  geom_nodelabel(data = filter(expenditures_network, name!= "Donald Trump" & name != "Joe Biden"), aes(label = name), color = "black", size = 1.1) +
+  geom_nodelabel(data = filter(expenditures_network, name!= "Donald Trump" & name != "Joe Biden"), aes(label = name), color = "black", size = 1.5) +
   geom_nodelabel(data = filter(expenditures_network, name == "Donald Trump"), aes(label = name), color = "blue", size = 4) +
   geom_nodelabel(data = filter(expenditures_network, name == "Joe Biden"), aes(label = name), color = "blue", size = 4) +
   theme_blank() +
@@ -104,5 +108,54 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
   theme(legend.text = element_text(size = 8)) +
   theme(legend.position = "bottom")
   
+
+```
+
+
+```{r}
+# Leaflet
+library(leaflet)
+
+state_info <- data.frame(state_full = tolower(state.name) , State = state.abb,
+                         Region = state.region)
+
+usa_states_leaflet <- map("state", fill = TRUE, plot = FALSE)
+
+
+temp <- state_info %>%
+  right_join(data.frame(state_full = usa_states_leaflet$names
+                        , order = 1:length(usa_states_leaflet$names))
+             , by = "state_full") %>%
+  left_join(individual_contributions, by = "State") %>%
+  arrange(order)
+
+usa_states_leaflet$candidates <- temp$candidate_cleaned
+usa_states_leaflet$contribution <- temp$Contribution
+usa_states_leaflet$contribution <- temp$Contribution
+
+# color palette
+mypal <- colorNumeric(
+  palette = "YlGnBu",
+  domain = usa_states_leaflet$prop_inperson
+)
+
+leaflet(data = usa_states_leaflet) %>% 
+  addTiles() %>%
+  setView(-72.5, 42.4, zoom = 3) %>%
+  addPolygons(fillColor = ~mypal(contribution)
+              , color = "#b2aeae"  #color needs to be in hex format
+              , fillOpacity = 0.7
+              , stroke = FALSE
+              , popup = paste0("State: ", usa_states_leaflet$names, "<br>"
+                             , "Total Contributions "
+                             , round(usa_states_leaflet$contribution,0)
+                                                                     )) %>%
+  # add legend explaining fill color
+   addLegend(pal = mypal, 
+            values = usa_states_leaflet$contribution, 
+            position = "bottomright", 
+            title = "Individual Contributions by State")
+
+
 
 ```

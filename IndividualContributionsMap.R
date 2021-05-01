@@ -7,6 +7,7 @@ library(datasets)
 library(mdsr)
 library(gapminder)
 library(dplyr)
+library(ggplot2)
 
 # Individual Contributions Maps for Each State
 # user can choose candidate(s)
@@ -94,14 +95,14 @@ server <- function(input,output){
     contributions_map %>%
       filter(candidate_cleaned %in% input$candidate) %>%
       ggplot(aes(x = long, y = lat, group = group,
-                                    fill = Contribution)) +
+                                    fill = Contribution/1000000)) +
       geom_polygon(color = "white") +
       facet_wrap(~candidate_cleaned) +
       theme_void() +
       coord_fixed(ratio = 1.3) +
-      labs(fill = "Individual Contributions for Chosen Candidates") +
+      labs(fill = "Individual Contributions in Millions") +
       theme(legend.position="bottom") +
-      scale_fill_distiller(palette = "BuPu", direction = "horizantle")
+      scale_fill_distiller(palette = "Blues", direction = "horizantle")
     })
 }
 

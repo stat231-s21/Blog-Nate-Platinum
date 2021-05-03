@@ -63,7 +63,7 @@ candidate_choice <- unique(contributions_map$candidate_cleaned)[-10]
 ############
 ui <- navbarPage(
   
-  theme = shinytheme("flatly"),
+  theme = shinytheme("paper"),
   
   title="Individual Contributions to Candidates",
   

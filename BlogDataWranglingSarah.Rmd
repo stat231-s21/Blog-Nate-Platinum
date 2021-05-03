@@ -1,6 +1,8 @@
 ---
 title: "Blog Data Wrangling - Sarah Edelson, Matthew Perkins, Seamus Lawton"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r}
@@ -17,10 +19,14 @@ library(mdsr)
 library(gapminder)
 library(igraph)
 library(maps)
-
+library(wordcloud)
 library(scales)
-
-
+library(tidyverse) 
+library(janitor)
+library(tidytext)
+library(wordcloud)
+library(textdata)
+library(DT)
 ```
 
 ```{r}
@@ -115,19 +121,40 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
 # Interactive Table for all independent expenditures
 independent_expenditures %>%
   select(candidate_name, committee_name, total, support_oppose_indicator) %>%
-  datatable(arrange(desc(total)))
+  datatable()
 
 ```
 
 
 ```{r}
-# Word Cloud for candidates in the primaries
+# Interactive Network
+library(visNetwork)
+library(gdata)
+
+make_network <- function(network) {
+
+name_vec <- name_vec <- c.factor(unique(c.factor(unique(independent_expenditures$candidate_name), 
+                     unique(independent_expenditures$committee_name))))
 
 
+from <- independent_expenditures$committee_name
+to <- independent_expenditures$candidate_name
+
+edges <- data.frame(from = from, to = to, value = support_oppose_indicator)
+nodes <- data.frame(id = name_vec, label = name_vec, group = name_vec)
+
+# network visualizations
+  visNetwork(nodes, edges, height = "500px", width = "100%")  %>% 
+    visNodes(shape = "dot") %>%  
+             # arrows show exports
+    visEdges(arrows = "to", arrowStrikethrough = F, smooth = T, physics = F) %>%
+    # hide other nodes and incoming edges when a node is selected
+    visOptions(highlightNearest = list(enabled = T, degree = 0)) %>%
+    # add navigation buttons and allow multiple nodes to be selected at once
+    visInteraction(navigationButtons = TRUE, multiselect = TRUE) %>%
+  visLayout(randomSeed = 17)
+  }
 ```
-
-
-
 
 
 
@@ -146,7 +173,8 @@ temp <- state_info %>%
                         , order = 1:length(usa_states_leaflet$names))
              , by = "state_full") %>%
   left_join(individual_contributions, by = "State") %>%
-  arrange(order)
+  arrange(order) %>%
+  filter(candidate_cleaned == "Donald Trump") 
 
 usa_states_leaflet$candidates <- temp$candidate_cleaned
 usa_states_leaflet$contribution <- temp$Contribution
@@ -158,7 +186,7 @@ mypal <- colorNumeric(
   domain = usa_states_leaflet$prop_inperson
 )
 
-leaflet(data = usa_states_leaflet) %>% 
+leaflet(data = usa_states_leaflet) %>%
   addTiles() %>%
   setView(-72.5, 42.4, zoom = 3) %>%
   addPolygons(fillColor = ~mypal(contribution)

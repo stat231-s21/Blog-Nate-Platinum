@@ -1,5 +1,5 @@
 ---
-title: "Title"
+title: "Presidential Election Finance Data"
 author: "Sarah Edelson, Seamus Lawton, Matthew Perkins"
 date: "Date"
 output:
@@ -12,6 +12,19 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align="center")
 library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(rvest)
+library(here)
+library(readr)
+library(ggnetwork)
+library(datasets)
+library(mdsr)
+library(gapminder)
+library(igraph)
+library(maps)
+library(scales)
 ```
 
 # Header 1
@@ -54,13 +67,52 @@ summary(cars) %>%
 In a study from the 1920s, fifty cars were used to see how the speed of the car and the distance taken to stop were related.  Speeds ranged between `r min(cars$speed)` and `r max(cars$speed)` mph.  Distances taken to stop ranged between `r min(cars$dist)` and `r max(cars$dist)` feet, with the middle 50% falling between `r as.numeric(quantile(cars$dist)[2])` and `r as.numeric(quantile(cars$dist)[4])` feet.  
 
 You can also embed plots as normal, for example:
+## Independent Expenditures for Joe Biden & Donald Trump
+
 
 ```{r figure1, echo=FALSE}
-ggplot(data = cars, aes(x = speed, y = dist)) + 
-  geom_point() + 
-  labs(x = "Speed of car (mph)"
-       , y = "Distance taken to stop (ft)"
-       , title = "cars data (1920s)")
+independent_expenditures <- read_csv(here("Data", "IndependentExpenditures.csv"))
+
+independent_expenditures <- independent_expenditures %>%
+  mutate(candidate_cleaned_ie = (case_when(
+         str_detect(candidate_name, "BIDEN, JOSEPH R JR") ~ "Joe Biden",
+         str_detect(candidate_name, "BLOOMBERG, MICHAEL R.") ~ "Michael Bloomberg",
+         str_detect(candidate_name, "HARRIS, KAMALA D.") ~ "Kamala Harris",
+         str_detect(candidate_name, "KLOBUCHAR, AMY J.") ~ "Amy Klobuchar",
+         str_detect(candidate_name, "SANDERS, BERNARD") ~ "Bernie Sanders",
+         str_detect(candidate_name, "STEYER, TOM") ~ "Tom Steyer",
+         str_detect(candidate_name, "TRUMP, DONALD J.") ~ "Donald Trump",
+         str_detect(candidate_name, "WARREN, ELIZABETH") ~ "Elizabeth Warren",
+         str_detect(candidate_name, "YANG, ANDREW MR.") ~ "Andrew Yang"
+         )))
+  
+
+independent_expenditures_large <- independent_expenditures %>%
+  select(committee_name, candidate_cleaned_ie, total, support_oppose_indicator) %>%
+  filter(total >= 10000000)  %>%
+  filter(candidate_cleaned_ie == "Donald Trump" | candidate_cleaned_ie == "Joe Biden")
+
+g_expenditures <- graph_from_data_frame(independent_expenditures_large, directed = TRUE)
+
+expenditures_network <- ggnetwork(g_expenditures) %>%
+  mutate(candidate = case_when(name == "Donald Trump" ~ "Donald Trump", 
+                               name == "Joe Biden" ~ "Joe Biden",
+                               TRUE ~ ""))
+
+# Color by support or oppose
+ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_edges(aes(size = total/1000000, color = support_oppose_indicator)) + geom_nodes() +
+  geom_nodelabel(data = filter(expenditures_network, name!= "Donald Trump" & name != "Joe Biden"), aes(label = name), color = "black", size = 1.5) +
+  geom_nodelabel(data = filter(expenditures_network, name == "Donald Trump"), aes(label = name), color = "blue", size = 4) +
+  geom_nodelabel(data = filter(expenditures_network, name == "Joe Biden"), aes(label = name), color = "blue", size = 4) +
+  theme_blank() +
+  scale_color_manual(values=c("red2", "slategray")) +
+  labs(size = "Contribution Size (millions)") +
+  labs(color = "Support or Oppose Candidate") +
+  ggtitle("Independent Expenditures Over 10 million") +
+  theme(legend.title = element_text(size = 8)) +
+  theme(legend.text = element_text(size = 8)) +
+  theme(legend.position = "bottom")
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

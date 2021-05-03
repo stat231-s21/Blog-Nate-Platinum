@@ -65,9 +65,9 @@ contributions_map <- individual_contributions %>%
 
 ```{r}
 # Create Network for independent expenditures
-independent_expenditures <- read_csv(here("Data", "IndependentExpenditures.csv"))
+independent_expenditures_raw <- read_csv(here("Data", "IndependentExpenditures.csv"))
 
-independent_expenditures <- independent_expenditures %>%
+independent_expenditures <- independent_expenditures_raw %>%
   mutate(candidate_cleaned_ie = (case_when(
          str_detect(candidate_name, "BIDEN, JOSEPH R JR") ~ "Joe Biden",
          str_detect(candidate_name, "BLOOMBERG, MICHAEL R.") ~ "Michael Bloomberg",
@@ -108,6 +108,14 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
   theme(legend.text = element_text(size = 8)) +
   theme(legend.position = "bottom")
   
+
+```
+
+```{r}
+# Interactive Table for all independent expenditures
+independent_expenditures %>%
+  select(candidate_name, committee_name, total, support_oppose_indicator) %>%
+  datatable(arrange(desc(total)))
 
 ```
 

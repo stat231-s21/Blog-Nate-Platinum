@@ -37,7 +37,18 @@ individual_contributions <- individual_contributions %>%
          str_detect(Candidate, "TRUMP, DONALD J.") ~ "Donald Trump",
          str_detect(Candidate, "WARREN, ELIZABETH") ~ "Elizabeth Warren",
          str_detect(Candidate, "YANG, ANDREW MR.") ~ "Andrew Yang"
-         )))
+         ))) %>%
+  mutate(party = (case_when(
+  str_detect(Candidate, "BIDEN, JOSEPH R JR") ~ "Democrat",
+  str_detect(Candidate, "BLOOMBERG, MICHAEL R.") ~ "Democrat",
+  str_detect(Candidate, "HARRIS, KAMALA D.") ~ "Democrat",
+  str_detect(Candidate, "KLOBUCHAR, AMY J.") ~ "Democrat",
+  str_detect(Candidate, "SANDERS, BERNARD") ~ "Democrat",
+  str_detect(Candidate, "STEYER, TOM") ~ "Democrat",
+  str_detect(Candidate, "TRUMP, DONALD J.") ~ "Republican",
+  str_detect(Candidate, "WARREN, ELIZABETH") ~ "Democrat",
+  str_detect(Candidate, "YANG, ANDREW MR.") ~ "Democrat"
+)))
   
 
 state_info <- data.frame(state_full = tolower(state.name) , State = state.abb,
@@ -75,11 +86,12 @@ ui <- navbarPage(
         selectizeInput(inputId = "candidate"
                        , label = "Choose candidate(s):"
                        , choices = candidate_choice
-                       , selected = "Joe Biden"
+                       , selected = "Joe Biden", "Donald Trump"
                        , multiple = TRUE)
       ),
       mainPanel(
-        plotOutput(outputId = "map")
+        plotOutput(outputId = "map1"),
+        plotOutput(outputId = "map2")
       )
     )
   )
@@ -91,9 +103,9 @@ ui <- navbarPage(
 server <- function(input,output){
   
   # INTERACTIVE MAP
-  output$map <- renderPlot({
+  output$map1 <- renderPlot({
     contributions_map %>%
-      filter(candidate_cleaned %in% input$candidate) %>%
+      filter(candidate_cleaned %in% input$candidate & party == "Democrat") %>%
       ggplot(aes(x = long, y = lat, group = group,
                                     fill = Contribution/1000000)) +
       geom_polygon(color = "white") +
@@ -103,7 +115,22 @@ server <- function(input,output){
       labs(fill = "Individual Contributions in Millions") +
       theme(legend.position="bottom") +
       scale_fill_distiller(palette = "Blues", direction = "horizantle")
-    })
+  })
+  
+  output$map2 <- renderPlot({
+    contributions_map %>%
+      filter(candidate_cleaned %in% input$candidate & party == "Republican") %>%
+      ggplot(aes(x = long, y = lat, group = group,
+                 fill = Contribution/1000000)) +
+      geom_polygon(color = "white") +
+      facet_wrap(~candidate_cleaned) +
+      theme_void() +
+      coord_fixed(ratio = 1.3) +
+      labs(fill = "Individual Contributions in Millions") +
+      theme(legend.position="bottom") +
+      scale_fill_distiller(palette = "Reds", direction = "horizantle")
+  })
+  
 }
 
 

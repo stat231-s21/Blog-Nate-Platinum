@@ -121,6 +121,7 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
 # Interactive Table for all independent expenditures
 independent_expenditures %>%
   select(candidate_name, committee_name, total, support_oppose_indicator) %>%
+  arrange(desc(total)) %>%
   datatable()
 ```
 

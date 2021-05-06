@@ -27,6 +27,7 @@ library(tidytext)
 library(wordcloud)
 library(textdata)
 library(DT)
+library(kableExtra)
 ```
 
 ```{r}
@@ -122,7 +123,9 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
 independent_expenditures %>%
   select(candidate_name, committee_name, total, support_oppose_indicator) %>%
   arrange(desc(total)) %>%
-  datatable()
+  datatable(
+    head(iris),
+    caption = "All Independent Expenditures")
 ```
 
 

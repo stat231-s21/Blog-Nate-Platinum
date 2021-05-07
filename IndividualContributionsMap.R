@@ -89,7 +89,7 @@ scale_distiller <- function(aesthetics, palette,name,...) {
 ############
 ui <- navbarPage(
   
-  theme = shinytheme("paper"),
+  theme = shinytheme("readable"),
   
   title="Individual Contributions to Candidates",
   
@@ -138,7 +138,8 @@ server <- function(input,output){
       scale_distiller("fill2", 14, "Republicans") +
       theme_void() +
       coord_fixed(ratio = 1.3) +
-      labs(title = "Individual Contributions in Millions ($)") +
+      labs(title = "Individual Contributions in Millions ($)
+           ") +
       theme(legend.position="bottom"
             , legend.title = element_text(size = 16)
             , legend.text = element_text(size = 10)

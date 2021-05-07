@@ -1,7 +1,6 @@
 ---
 title: "Presidential Election Finance Data"
 author: "Sarah Edelson, Seamus Lawton, Matthew Perkins"
-date: "Date"
 output:
   prettydoc::html_pretty:
     theme: architect
@@ -57,6 +56,7 @@ Let's clean up the format of that output:
 In a study from the 1920s, fifty cars were used to see how the speed of the car and the distance taken to stop were related.  Speeds ranged between `r min(cars$speed)` and `r max(cars$speed)` mph.  Distances taken to stop ranged between `r min(cars$dist)` and `r max(cars$dist)` feet, with the middle 50% falling between `r as.numeric(quantile(cars$dist)[2])` and `r as.numeric(quantile(cars$dist)[4])` feet.  
 
 You can also embed plots as normal, for example:
+
 ## Independent Expenditures for Joe Biden & Donald Trump
 
 
@@ -132,14 +132,20 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
+## All Independent Expenditures
+
 ```{r pretty, echo=FALSE, warning=FALSE, message=FALSE, fig.width = 30}
 independent_expenditures %>%
   select(candidate_name, committee_name, total, support_oppose_indicator) %>%
   arrange(desc(total)) %>%
   datatable(
-    head(iris),
-    caption = "All Independent Expenditures")
+    head(iris)
+    )
 ```
+
+## Individual Contributions
+
+
 
 ## Including links and images
 

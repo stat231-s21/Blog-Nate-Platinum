@@ -8,7 +8,6 @@ library(mdsr)
 library(gapminder)
 library(dplyr)
 library(ggplot2)
-library(ggnewscale)
 
 # Individual Contributions Maps for Each State
 # user can choose candidate(s)
@@ -114,7 +113,10 @@ server <- function(input,output){
       coord_fixed(ratio = 1.3) +
       labs(fill = "Individual Contributions in Millions") +
       theme(legend.position="bottom") +
-      scale_fill_distiller(palette = "Blues", direction = "horizantle")
+      scale_fill_distiller(palette = "Blues", direction = "horizantle") +
+      theme(legend.title = element_text(size = 16)) +
+      theme(legend.text = element_text(size = 10)) +
+      theme(strip.text = element_text(size = 16))
   })
   
 }

@@ -80,6 +80,7 @@ candidate_choice <- unique(contributions_map$candidate_cleaned)[-10]
 # EXTENSION: CODE TO MAKE FACETTED PLOT WITH DIFF COLOR SCALES#
 ###############################################################
 
+# following second example (first facetted example) provided here: https://github.com/clauswilke/relayer
 
 # make color scale shortcut
 scale_distiller <- function(aesthetics, palette,name,...) {

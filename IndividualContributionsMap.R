@@ -8,6 +8,7 @@ library(mdsr)
 library(gapminder)
 library(dplyr)
 library(ggplot2)
+library(ggnewscale)
 
 # Individual Contributions Maps for Each State
 # user can choose candidate(s)
@@ -90,8 +91,7 @@ ui <- navbarPage(
                        , multiple = TRUE)
       ),
       mainPanel(
-        plotOutput(outputId = "map1"),
-        plotOutput(outputId = "map2")
+        plotOutput(outputId = "map1")
       )
     )
   )
@@ -105,7 +105,7 @@ server <- function(input,output){
   # INTERACTIVE MAP
   output$map1 <- renderPlot({
     contributions_map %>%
-      filter(candidate_cleaned %in% input$candidate & party == "Democrat") %>%
+      filter(candidate_cleaned %in% input$candidate) %>%
       ggplot(aes(x = long, y = lat, group = group,
                                     fill = Contribution/1000000)) +
       geom_polygon(color = "white") +
@@ -115,20 +115,6 @@ server <- function(input,output){
       labs(fill = "Individual Contributions in Millions") +
       theme(legend.position="bottom") +
       scale_fill_distiller(palette = "Blues", direction = "horizantle")
-  })
-  
-  output$map2 <- renderPlot({
-    contributions_map %>%
-      filter(candidate_cleaned %in% input$candidate & party == "Republican") %>%
-      ggplot(aes(x = long, y = lat, group = group,
-                 fill = Contribution/1000000)) +
-      geom_polygon(color = "white") +
-      facet_wrap(~candidate_cleaned) +
-      theme_void() +
-      coord_fixed(ratio = 1.3) +
-      labs(fill = "Individual Contributions in Millions") +
-      theme(legend.position="bottom") +
-      scale_fill_distiller(palette = "Reds", direction = "horizantle")
   })
   
 }

@@ -8,6 +8,7 @@ library(mdsr)
 library(gapminder)
 library(dplyr)
 library(ggplot2)
+library(relayer)
 
 # Individual Contributions Maps for Each State
 # user can choose candidate(s)
@@ -69,6 +70,20 @@ contributions_map <- individual_contributions %>%
 candidate_choice <- unique(contributions_map$candidate_cleaned)[-10]
 
 
+####################################################
+# define scale_distiller() for facetted map colors #
+####################################################
+
+scale_distiller <- function(aesthetics, palette,name,...) {
+  scale_fill_distiller(
+    aesthetics = aesthetics,
+    palette = palette,
+    name = name, ..., 
+    limits = c(0,150),
+    direction = "horizantle",
+    guide = guide_legend(order = palette))
+}
+
 ############
 #    ui    #
 ############
@@ -102,21 +117,33 @@ ui <- navbarPage(
 server <- function(input,output){
   
   # INTERACTIVE MAP
+  
+  
   output$map1 <- renderPlot({
-    contributions_map %>%
-      filter(candidate_cleaned %in% input$candidate) %>%
-      ggplot(aes(x = long, y = lat, group = group,
-                                    fill = Contribution/1000000)) +
-      geom_polygon(color = "white") +
+    
+    # subset data
+    dems <- contributions_map %>%
+      filter(candidate_cleaned %in% input$candidate & party=="Democrat") 
+    reps <- contributions_map %>%
+      filter(candidate_cleaned %in% input$candidate & party=="Republican") 
+    
+    # plot
+    ggplot(mapping = aes(x = long, y = lat, group = group), color = "white") +
+      (geom_polygon(data = dems, aes(fill1 = Contribution/1000000)) %>%
+         rename_geom_aes(new_aes = c("fill" = "fill1"))) +
+      (geom_polygon(data = reps, aes(fill2 = Contribution/1000000)) %>%
+         rename_geom_aes(new_aes = c("fill" = "fill2"))) +
       facet_wrap(~candidate_cleaned) +
+      scale_distiller("fill1", 1, "Democrats") +
+      scale_distiller("fill2", 14, "Republicans") +
       theme_void() +
       coord_fixed(ratio = 1.3) +
-      labs(fill = "Individual Contributions in Millions") +
-      theme(legend.position="bottom") +
-      scale_fill_distiller(palette = "Blues", direction = "horizantle") +
-      theme(legend.title = element_text(size = 16)) +
-      theme(legend.text = element_text(size = 10)) +
-      theme(strip.text = element_text(size = 16))
+      labs(title = "Individual Contributions in Millions ($)") +
+      theme(legend.position="bottom"
+            , legend.title = element_text(size = 16)
+            , legend.text = element_text(size = 10)
+            , strip.text = element_text(size = 16)
+            , plot.title = element_text(size=20))
   })
   
 }

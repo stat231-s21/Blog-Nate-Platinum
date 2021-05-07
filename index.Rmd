@@ -100,7 +100,7 @@ independent_expenditures_large <- independent_expenditures %>%
 
 independent_expenditures_large <- independent_expenditures_large %>%
   select(committee_cleaned, candidate_cleaned_ie, total, support_oppose_indicator) %>%
-  filter(total >= 10000000)  %>%
+  filter(total > 10000000)  %>%
   filter(candidate_cleaned_ie == "Donald Trump" | candidate_cleaned_ie == "Joe Biden")
 
 set.seed(15)
@@ -126,7 +126,8 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
   theme(plot.title = element_text(size = 40)) +
   theme(legend.title = element_text(size = 40)) +
   theme(legend.text = element_text(size = 40)) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(override.aes = list(size = 5)))
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

@@ -134,7 +134,7 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 ```{r pretty, echo=FALSE, warning=FALSE, message=FALSE, fig.width = 30}
 independent_expenditures %>%
-  select(candidate_name, committee_name, total, support_oppose_indicator) %>%
+  select(candidate_cleaned_ie, committee_name, total, support_oppose_indicator) %>%
   arrange(desc(total)) %>%
   datatable(
     head(iris),

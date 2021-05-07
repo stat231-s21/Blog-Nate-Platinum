@@ -144,7 +144,9 @@ independent_expenditures %>%
 ```
 
 ## Individual Contributions
-
+```{r}
+knitr::include_app("https://sedelson31.shinyapps.io/IndividualContributionsMap/?_ga=2.177633829.1230189455.1620406833-1360701694.1615303791")
+```
 
 
 ## Including links and images

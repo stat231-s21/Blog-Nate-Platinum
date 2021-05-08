@@ -57,8 +57,12 @@ In a study from the 1920s, fifty cars were used to see how the speed of the car 
 
 You can also embed plots as normal, for example:
 
+## $14 billion
+We live in a world where money and politics are largely intertwined. This fact is starkly apparent when examining the net worth of certain 2020 presidential candidates. Michael Bloomberg, who has a net worth of \$59 billion, spent over \$1 billion on his own candidacy. Tom Steyer, a former hedge fund manager and billonaire, also made a run for President. The 45th President, Donald Trump, made a fortune through his real estate empire. The 2020 election, including both presidential and congressional races, cost a record-breaking $14 billion. Aside from candidates' own wealth, **where is the rest of this campaign money coming from?** We set out to address questions pertaining to campaign finance data, seeking to understand who is making political donations and to whom they are supporting.
+
 ## Independent Expenditures for Joe Biden & Donald Trump
 
+We obtained data from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/) to determine how much money different organizations spent either supporting or opposing Joe Biden and Donald Trump, the two main presidential candidates in the 2020 general election. The dataset contained 863 observations, indicating that there were expenditures from 863 organizations, ranging in size from $2.80 to over $133 million. In order to make a network visualizing the connections between different organizations and the two candidates, we filtered the data to include only donations that were greater than $10 million.
 
 ```{r fig.width = 35, fig.height = 15, message = FALSE, echo=FALSE}
 independent_expenditures <- read_csv(here("Data", "IndependentExpenditures.csv"))
@@ -130,9 +134,14 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
   guides(color = guide_legend(override.aes = list(size = 5)))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+The network indicates that:
+
+- The largest donors were skewed more towards Biden then Trump. Biden received support from six organizations, while Trump received support from two. Five organizations opposed Biden while size opposed Trump. 
+- Two organizations spent money supporting one candidate and opposing the other: the FF Pac made expenditures supporting Joe Biden and opposing Donald Trump, while Priorities USA Action did the opposite.
+- Candidate priorities align with donors. Conservatives have historically been large advocates for gun rights, explaining why the NRA Victory Fund would oppose Biden. Democrats are more invested in combating problems pertaining to climate change and environmental justice, leading the NextGen Climate Action Committee to support Biden.
 
 ## All Independent Expenditures
+While the network only draws attention to the largest expenditures for the two largest candidate, explore this interactive table to learn more about expenditures of all sizes and to all candidates.
 
 ```{r pretty, echo=FALSE, warning=FALSE, message=FALSE, fig.width = 30}
 independent_expenditures %>%
@@ -156,6 +165,9 @@ You can include [Links](https://www.datadreaming.org/post/r-markdown-theme-galle
 You can embed a gif.
 
 ![pugs](https://media.giphy.com/media/XHVmD4RyXgSjd8aUMb/giphy.gif)
+
+### Citations
+
 
 # You can even create tabs if you want! {.tabset .tabset-fade .tabset-pills}
 

@@ -71,7 +71,6 @@ contributions_map <- individual_contributions %>%
 
 
 ```{r}
-# Create Network for independent expenditures
 independent_expenditures <- read_csv(here("Data", "IndependentExpenditures.csv"))
 
 independent_expenditures <- independent_expenditures %>%
@@ -93,25 +92,25 @@ independent_expenditures_large <- independent_expenditures %>%
          str_detect(committee_name, "DEFENDING DEMOCRACY TOGETHER") ~ (paste("DEFENDING", "DEMOCRACY", "TOGETHER", sep="\n")),
          str_detect(committee_name, "AB PAC") ~ "AB PAC",
          str_detect(committee_name, "THE LINCOLN PROJECT") ~ "THE LINCOLN PROJECT",
-         str_detect(committee_name, "GREAT AMERICA PAC") ~ "GREAT AMERICA PAC.",
+         str_detect(committee_name, "GREAT AMERICA PAC") ~ (paste("GREAT AMERICA", "PAC.", sep="\n")),
          str_detect(committee_name, "THE COMMITTEE TO DEFEND THE PRESIDENT") ~ (paste("THE COMMITTEE", "TO DEFEND", "THE PRESIDENT", sep = "\n")),
-         str_detect(committee_name, "LCV VICTORY FUND") ~ "LCV VICTORY FUND",
-         str_detect(committee_name, "PRIORITIES USA ACTION") ~ "PRIORITIES USA ACTION",
+         str_detect(committee_name, "LCV VICTORY FUND") ~ (paste("LCV VICTORY", "FUND", sep="\n")),
+         str_detect(committee_name, "PRIORITIES USA ACTION") ~ (paste("PRIORITIES USA", "ACTION", sep="\n")),
          str_detect(committee_name, "FF PAC") ~ "FF PAC",
          str_detect(committee_name, "INDEPENDENCE USA PAC") ~ "INDEPENDENCE USA PAC",
          str_detect(committee_name, "BLACK PAC") ~ "BLACK PAC",
          str_detect(committee_name, "RESTORATION PAC") ~ "RESTORATION PAC",
-         str_detect(committee_name, "AMERICA FIRST ACTION, INC.") ~ (paste("AMERICA FIRST","ACTION, INC.", sep="\n")),
+         str_detect(committee_name, "AMERICA FIRST ACTION, INC.") ~ "AMERICA FIRST ACTION, INC.",
          str_detect(committee_name, "UNITE THE COUNTRY") ~ "UNITE THE COUNTRY",
-         str_detect(committee_name, "NRA VICTORY FUND, INC.") ~ "NRA VICTORY FUND, INC.",
-         str_detect(committee_name, "CLUB FOR GROWTH ACTION") ~ "CLUB FOR GROWTH ACTION",
-         str_detect(committee_name, "NEXTGEN CLIMATE ACTION COMMITTEE") ~ (paste("NEXTGEN CLIMATE", "ACTION COMMITTEE", sep="\n")),
-         str_detect(committee_name, "PRESERVE AMERICA PAC") ~ "PRESERVE AMERICA PAC")
+         str_detect(committee_name, "NRA VICTORY FUND, INC.") ~ (paste("NRA VICTORY", "FUND, INC.", sep="\n")),
+         str_detect(committee_name, "CLUB FOR GROWTH ACTION") ~ (paste("CLUB FOR", "GROWTH ACTION", sep="\n")),
+         str_detect(committee_name, "NEXTGEN CLIMATE ACTION COMMITTEE") ~ (paste("NEXTGEN", "CLIMATE", "ACTION", "COMMITTEE", sep="\n")),
+         str_detect(committee_name, "PRESERVE AMERICA PAC") ~ paste("PRESERVE AMERICA", "PAC", sep="\n"))
          ))
 
 independent_expenditures_large <- independent_expenditures_large %>%
   select(committee_cleaned, candidate_cleaned_ie, total, support_oppose_indicator) %>%
-  filter(total >= 10000000)  %>%
+  filter(total > 10000000)  %>%
   filter(candidate_cleaned_ie == "Donald Trump" | candidate_cleaned_ie == "Joe Biden")
 
 set.seed(15)
@@ -134,10 +133,11 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
   labs(size = "Contribution Size (millions)") +
   labs(color = "Support or Oppose Candidate") +
   ggtitle("Independent Expenditures Over 10 million") +
-  theme(plot.title = element_text(size = 30)) +
-  theme(legend.title = element_text(size = 30)) +
-  theme(legend.text = element_text(size = 30)) +
-  theme(legend.position = "bottom")
+  theme(plot.title = element_text(size = 40)) +
+  theme(legend.title = element_text(size = 40)) +
+  theme(legend.text = element_text(size = 40)) +
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(override.aes = list(size = 5)))
 ```
 
 ```{r}

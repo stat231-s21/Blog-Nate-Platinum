@@ -149,7 +149,9 @@ independent_expenditures %>%
 
 ## Individual Contributions
 
-<iframe height="400" width="100%" frameborder="no" src="http://sedelson31.shinyapps.io/IndividualContributionsMap"> </iframe>
+![This is a static image of the interactive map, outining total individual contributions by state for different candidates.](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/MapImage.png)
+
+Click [here](http://sedelson31.shinyapps.io/IndividualContributionsMap) to view the interactive map.
 
 Besides PACs and Super PACs, a significant portion of campaign spending comes from individual contributions. Which candidates amassed the most support from the general public, and which states spent the most on individual contributions? The map shows that:
 
@@ -161,7 +163,7 @@ Besides PACs and Super PACs, a significant portion of campaign spending comes fr
 
 This map only conveys totals for each state, but we would be interested in further analyzing the average contribution across states, or even more specific municipal levels, and other demographic factors influencing donations. For example, we could test the belief that lower-income, people residing in rural areas tend to support Trump by examining where many of the people that donated up to $20 lived. 
 
-This New York Times Upshot article called "The True Colors of America's Political Spectrum Are Gray and Green" examines how satellite images of the United States are good indicators of voting patterns. In the 2016 election, places with more greenery (often rural areas) leaned towards Trump, while places with more gray in the satellite images (indicating roads and buildings) leaned towards Clinton. An extension of this project could be examining how the average number and value of expenditures for each candidate varies across the satellite image color spectrum.
+[This](https://www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html) New York Times Upshot article called _"The True Colors of America's Political Spectrum Are Gray and Green"_ examines how satellite images of the United States are good indicators of voting patterns. In the 2016 election, places with more greenery (often rural areas) leaned towards Trump, while places with more gray in the satellite images (indicating roads and buildings) leaned towards Clinton. An extension of this project could be examining how the average number and value of expenditures for each candidate varies across the satellite image color spectrum.
 
 ## Including links and images
 

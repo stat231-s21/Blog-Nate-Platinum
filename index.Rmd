@@ -43,13 +43,6 @@ You should test out updating your GitHub Pages website:
 - commit and push BOTH the `index.Rmd` and the `index.html` files
 - go to https://stat231-s21.github.io/Blog-Nate-Platinum/ to see the published test document (this is publicly available!)
 
-## Including code and plots
-
-You can embed code as normal, for example:
-
-```{r cars}
-summary(cars)
-```
 
 Let's clean up the format of that output:
 
@@ -137,13 +130,13 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
 The network indicates that:
 
 - The largest donors were skewed more towards Biden then Trump. Biden received support from six organizations, while Trump received support from two. Five organizations opposed Biden while six opposed Trump. 
-- Two organizations spent money supporting one candidate and opposing the other: the FF Pac made expenditures supporting Joe Biden and opposing Donald Trump, while Priorities USA Action did the opposite.
-- Candidate priorities align with donors. Conservatives have historically been large advocates for gun rights, explaining why the NRA Victory Fund would oppose Biden. Democrats are more invested in combating problems pertaining to climate change and environmental justice, leading the NextGen Climate Action Committee to support Biden.
+- Two organizations spent money supporting one candidate and opposing the other: the **FF Pac** made expenditures supporting Joe Biden and opposing Donald Trump, while **Priorities USA Action** did the opposite.
+- Candidate priorities align with donors. Conservatives have historically been large advocates for gun rights, explaining why the **NRA Victory Fund** would oppose Biden. Democrats are more invested in combating problems pertaining to climate change and environmental justice, leading the **NextGen Climate Action Committee** to support Biden.
 
 Moving forward, it would be interesting to examine how the number of PACs/organizations and their missions differ at different levels of expenditures.
 
 ## All Independent Expenditures
-While the network only draws attention to the largest expenditures for the two largest candidate, explore this interactive table to learn more about expenditures of all sizes and to all candidates.
+While the network only draws attention to the largest expenditures for the two major candidates, explore this interactive table to learn more about expenditures of all sizes and to all candidates.
 
 ```{r pretty, echo=FALSE, warning=FALSE, message=FALSE, fig.width = 30}
 independent_expenditures %>%
@@ -158,9 +151,17 @@ independent_expenditures %>%
 
 <iframe height="400" width="100%" frameborder="no" src="http://sedelson31.shinyapps.io/IndividualContributionsMap"> </iframe>
 
-Besides PACs and Super PACs, a significant portion of campaign spending comes from individual contributions. Which candidates amassed the most support from the general public, and which states spent the most on individual contributions? The map shows that Donald Trump received the most contributions from California, Texas, Florida, and Virginia. Joe Biden received the most contributions from California and New York. Certain candidates who lost in the primaries tended to receive most of their contributions from the states which they have served. For example, Kalama Harris was a California senator and acquired most of her donations from that state. Amy Klobuchar received the most contributions from Minnesota, where she was a senator. Massachusetts senator Elizabeth Warren also obtained a majority of her contributions from her home state.
+Besides PACs and Super PACs, a significant portion of campaign spending comes from individual contributions. Which candidates amassed the most support from the general public, and which states spent the most on individual contributions? The map shows that:
 
-This map only conveys totals for each state, but we would be interested in further analyzing the average contribution across states, or even more specific municipal levels, and other demographic factors influencing donations. For example, we could test the belief that lower-income, rural people tend to support Trump by examining where many of the people that donated up to $20 lived.
+-Donald Trump received the most contributions from **California**, **Texas**, **Florida**, and **Virginia**. 
+
+-Joe Biden received the most contributions from **California** and **New York**. 
+
+-Certain candidates who lost in the primaries tended to receive most of their contributions from the states which they have served. For example, Kalama Harris was a California senator and acquired most of her donations from that state. Amy Klobuchar received the most contributions from Minnesota, where she was a senator. Massachusetts senator Elizabeth Warren also obtained a majority of her contributions from her home state.
+
+This map only conveys totals for each state, but we would be interested in further analyzing the average contribution across states, or even more specific municipal levels, and other demographic factors influencing donations. For example, we could test the belief that lower-income, people residing in rural areas tend to support Trump by examining where many of the people that donated up to $20 lived. 
+
+This New York Times Upshot article called "The True Colors of America's Political Spectrum Are Gray and Green" examines how satellite images of the United States are good indicators of voting patterns. In the 2016 election, places with more greenery (often rural areas) leaned towards Trump, while places with more gray in the satellite images (indicating roads and buildings) leaned towards Clinton. An extension of this project could be examining how the average number and value of expenditures for each candidate varies across the satellite image color spectrum.
 
 ## Including links and images
 

@@ -55,7 +55,7 @@ We live in a world where money and politics are largely intertwined. This fact i
 
 ## Independent Expenditures for Joe Biden & Donald Trump
 
-We obtained data from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/) to determine how much money different organizations spent either supporting or opposing Joe Biden and Donald Trump, the two main presidential candidates in the 2020 general election. The dataset contained 863 observations, indicating that there were expenditures from 863 organizations, ranging in size from $2.80 to over $133 million. In order to make a network visualizing the connections between different organizations and the two candidates, we filtered the data to include only donations that were greater than $10 million.
+We obtained data from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/) to determine how much money different organizations spent either supporting or opposing Joe Biden and Donald Trump, the two main presidential candidates in the 2020 general election. The dataset, called "IndependentExpenditures.csv", contained 863 observations, indicating that there were expenditures from 863 organizations, ranging in size from $2.80 to over $133 million. In order to make a network visualizing the connections between different organizations and the two candidates, we filtered the data to include only donations that were greater than $10 million.
 
 ```{r fig.width = 35, fig.height = 15, message = FALSE, echo=FALSE}
 independent_expenditures <- read_csv(here("Data", "IndependentExpenditures.csv"))
@@ -149,21 +149,24 @@ independent_expenditures %>%
 
 ## Individual Contributions
 
-![This is a static image of the interactive map, outining total individual contributions by state for different candidates.](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/MapImage.png)
+Besides PACs and Super PACs, a significant portion of campaign spending comes from individual contributions. Which candidates amassed the most support from the general public, and which states spent the most on individual contributions?
+
+![This is a static image of the interactive map, outining total individual contributions by state for different candidates. The map was created using the "IndividualContributions.csv" dataset, which I converted to a long format so that each observation included the state, state contribution, and candidate. ](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/MapImage.png)
 
 Click [here](http://sedelson31.shinyapps.io/IndividualContributionsMap) to view the interactive map.
 
-Besides PACs and Super PACs, a significant portion of campaign spending comes from individual contributions. Which candidates amassed the most support from the general public, and which states spent the most on individual contributions? The map shows that:
+ 
+The map shows that:
 
--Donald Trump received the most contributions from **California**, **Texas**, **Florida**, and **Virginia**. 
+- Donald Trump received the most contributions from **California**, **Texas**, **Florida**, and **Virginia**. 
 
--Joe Biden received the most contributions from **California** and **New York**. 
+- Joe Biden received the most contributions from **California** and **New York**. 
 
--Certain candidates who lost in the primaries tended to receive most of their contributions from the states which they have served. For example, Kalama Harris was a California senator and acquired most of her donations from that state. Amy Klobuchar received the most contributions from Minnesota, where she was a senator. Massachusetts senator Elizabeth Warren also obtained a majority of her contributions from her home state.
+- Certain candidates who lost in the primaries tended to receive most of their contributions from the states which they have served. For example, Kalama Harris was a California senator and acquired most of her donations from that state. Amy Klobuchar received the most contributions from Minnesota, where she was a senator. Massachusetts senator Elizabeth Warren also obtained a majority of her contributions from her home state.
 
 This map only conveys totals for each state, but we would be interested in further analyzing the average contribution across states, or even more specific municipal levels, and other demographic factors influencing donations. For example, we could test the belief that lower-income, people residing in rural areas tend to support Trump by examining where many of the people that donated up to $20 lived. 
 
-[This](https://www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html) New York Times Upshot article called _"The True Colors of America's Political Spectrum Are Gray and Green"_ examines how satellite images of the United States are good indicators of voting patterns. In the 2016 election, places with more greenery (often rural areas) leaned towards Trump, while places with more gray in the satellite images (indicating roads and buildings) leaned towards Clinton. An extension of this project could be examining how the average number and value of expenditures for each candidate varies across the satellite image color spectrum.
+[This](https://www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html) New York Times Upshot article called _"The True Colors of America's Political Spectrum Are Gray and Green"_ examines how satellite images of the United States tend to be accurate indicators of voting patterns. In the 2016 election, places with more greenery (often rural areas) leaned towards Trump, while places with more gray in the satellite images (indicating roads and buildings) leaned towards Clinton. An extension of this project could be examining how the average number and value of expenditures for each candidate varies across the satellite image color spectrum.
 
 ## Including links and images
 
@@ -176,7 +179,8 @@ You can embed a gif.
 ### Limitations
 
 ### Citations
-“2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/. 
+-“2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/. 
+-Wilke, Claus. “Relayer.” GitHub, github.com/clauswilke/relayer. 
 
 
 # You can even create tabs if you want! {.tabset .tabset-fade .tabset-pills}

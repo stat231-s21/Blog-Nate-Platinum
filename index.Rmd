@@ -168,6 +168,33 @@ This map only conveys totals for each state, but we would be interested in furth
 
 [This](https://www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html) New York Times Upshot article called _"The True Colors of America's Political Spectrum Are Gray and Green"_ examines how satellite images of the United States tend to be accurate indicators of voting patterns. In the 2016 election, places with more greenery (often rural areas) leaned towards Trump, while places with more gray in the satellite images (indicating roads and buildings) leaned towards Clinton. An extension of this project could be examining how the average number and value of expenditures for each candidate varies across the satellite image color spectrum.
 
+## Individual Contributions Breakdown
+
+```{r fig.width = 8, fig.height = 5, message = FALSE, echo=FALSE}
+contribution_breakdown <- read_csv(here("Data", "ContributionBreakdown.csv"))
+
+contribution_breakdown_clean <- contribution_breakdown %>%
+  pivot_longer(!Candidate, names_to = "Category", values_to = "Contribution") %>%
+  janitor::clean_names() %>%
+  filter(candidate != "Bernie Sanders") %>%
+  filter(candidate != "Elizabeth Warren") %>%
+  filter(candidate != "Andrew Yang") %>%
+  filter(candidate != "Amy Klobuchar") %>%
+  filter(candidate != "Tom Steyer") %>%
+  filter(candidate != "Michael Bloomberg") %>%
+  filter(candidate != "Kamala Harris")
+
+
+ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=contribution/1000000,fill = candidate)) +
+  facet_wrap(~category) +
+  geom_bar(stat="identity") +
+  scale_fill_manual(values = c("#a62c2b", "#4682B4")) +
+  ylab("Contribution (Millions)") +
+  xlab("") +
+  theme(legend.position = "none")
+```
+
+
 ## Including links and images
 
 You can include [Links](https://www.datadreaming.org/post/r-markdown-theme-gallery/) and images ![team logo](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/S1-politics.jpg)

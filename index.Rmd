@@ -155,10 +155,11 @@ independent_expenditures %>%
 ```
 
 ## Individual Contributions
-```{r}
-knitr::include_app("http://sedelson31.shinyapps.io/IndividualContributionsMap")
-```
-Besides PACs and Super PACs, a significant portion of campaign spending comes from individual contributions. Which candidates amassed the most support from the general public, and which states spent the most on individual contributions?
+
+<iframe height="400" width="100%" frameborder="no"
+src="http://sedelson31.shinyapps.io/IndividualContributionsMap"> </iframe>
+
+Besides PACs and Super PACs, a significant portion of campaign spending comes from individual contributions. Which candidates amassed the most support from the general public, and which states spent the most on individual contributions? The map shows that Donald Trump received the most contributions from California, Texas, Florida, and Virginia. Joe Biden received the most contributions from California and New York. Certain candidates who lost in the primaries tended to receive most of their contributions from the states which they have served. For example, Kalama Harris was a California senator and acquired most of her donations from that state. Amy Klobuchar received the most contributions from Minnesota, where she was a senator. Massachusetts senator Elizabeth Warren also obtained a majority of her contributions from her home state.
 
 This map only conveys totals for each state, but we would be interested in further analyzing the average contribution across states, or even more specific municipal levels, and other demographic factors influencing donations. For example, we could test the belief that lower-income, rural people tend to support Trump by examining where many of the people that donated up to $20 lived.
 

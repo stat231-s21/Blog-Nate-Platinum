@@ -63,9 +63,8 @@ server <- function(input,output){
 
   
   output$bar <- renderPlot({
-    filter(category %in% input$category_values)
-    ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=expenditure/1000000)) +
-      geom_bar(stat="identity", fill="steelblue")+
+    ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=expenditure/1000000) +
+      geom_bar(stat="identity", fill = candidate))+
       theme_minimal()
   })
   

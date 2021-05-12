@@ -195,7 +195,8 @@ ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=contribution/1000
   ylab("Contribution (Millions)") +
   xlab("") +
   theme(legend.position = "none") +
-  theme(strip.text.x = element_text(size = 12))
+  theme(strip.text.x = element_text(size = 12)) +
+  theme(axis.text.x = element_text(size = 12))
 
 ```
 

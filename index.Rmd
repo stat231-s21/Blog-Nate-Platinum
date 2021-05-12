@@ -151,6 +151,9 @@ independent_expenditures %>%
 
 Besides PACs and Super PACs, a significant portion of campaign spending comes from individual contributions. Which candidates amassed the most support from the general public, and which states spent the most on individual contributions?
 
+<iframe height="400" width="100%" frameborder="no" src="http://sedelson31.shinyapps.io/IndividualContributionsMap"> </iframe>
+
+
 ![This is a static image of the interactive map, outining total individual contributions by state for different candidates. The map was created using the "IndividualContributions.csv" dataset, which I converted to a long format so that each observation included the state, state contribution, and candidate. ](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/MapImage.png)
 
 Click [here](http://sedelson31.shinyapps.io/IndividualContributionsMap) to view the interactive map.
@@ -170,7 +173,7 @@ This map only conveys totals for each state, but we would be interested in furth
 
 ## Individual Contributions Breakdown
 
-```{r fig.width = 8, fig.height = 5, message = FALSE, echo=FALSE}
+```{r fig.width = 15, fig.height = 8, message = FALSE, echo=FALSE}
 contribution_breakdown <- read_csv(here("Data", "ContributionBreakdown.csv"))
 
 contribution_breakdown_clean <- contribution_breakdown %>%
@@ -191,7 +194,9 @@ ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=contribution/1000
   scale_fill_manual(values = c("#a62c2b", "#4682B4")) +
   ylab("Contribution (Millions)") +
   xlab("") +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  theme(strip.text.x = element_text(size = 12))
+
 ```
 
 

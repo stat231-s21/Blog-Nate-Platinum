@@ -52,7 +52,8 @@ You can also embed plots as normal, for example:
 
 ## Introduction
 ![Image](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/Spending.png)
-We live in a world where money and politics are largely intertwined. This fact is starkly apparent when examining the net worth of certain 2020 presidential candidates. Michael Bloomberg, who has a net worth of \$59 billion, spent over \$1 billion on his own candidacy. Tom Steyer, a former hedge fund manager and billionaire, also made a run for President. The 45th President, Donald Trump, made a fortune through his real estate empire, allocating millions to his campaign. The 2020 election, including both presidential and congressional races, cost a record-breaking $14 billion. Aside from candidates' own wealth, **where is the rest of this campaign money coming from?** I set out to address questions pertaining to 2020 election finance data, seeking to understand who is making political donations and to whom they are supporting. The three datasets I used were all from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/), and focused on independent expenditures, individual contributions by state, and individual contributions broken down by expenditure level.
+We live in a world where money and politics are largely intertwined. This fact is starkly apparent when examining the net worth of certain 2020 presidential candidates. Michael Bloomberg, who has a net worth of \$59 billion, spent over \$1 billion on his own candidacy. Tom Steyer, a former hedge fund manager and billionaire, also made a run for President. The 45th President, Donald Trump, made a fortune through his real estate empire, allocating millions to his campaign. The 2020 election, including both presidential and congressional races, cost a record-breaking <span style="color:red">*14 billion*</span>
+. Aside from candidates' own wealth, **where is the rest of this campaign money coming from?** I set out to address questions pertaining to 2020 election finance data, seeking to understand who is making political donations and to whom they are supporting. The three datasets I used were all from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/), and focused on independent expenditures, individual contributions by state, and individual contributions broken down by expenditure level.
 
 ## Independent Expenditures for Joe Biden & Donald Trump
 
@@ -165,12 +166,16 @@ The map shows that:
 
 - Certain candidates who lost in the primaries tended to receive most of their contributions from the states which they have served. For example, Kalama Harris was a California senator and acquired most of her donations from that state. Amy Klobuchar received the most contributions from Minnesota, where she was a senator. Massachusetts senator Elizabeth Warren also obtained a majority of her contributions from her home state.
 
-This map only conveys totals for each state, but we would be interested in further analyzing the average contribution across states, or even more specific municipal levels, and other demographic factors influencing donations. For example, we could test the belief that lower-income, people residing in rural areas tend to support Trump by examining where many of the people that donated up to $20 lived. 
+This map only conveys totals for each state, but I would be interested in further analyzing the average contribution across states, or even more specific municipal levels, in addition to other demographic factors influencing donations. For example, we could test the belief that lower-income, people residing in rural areas tend to support Trump by examining where many of the people that donated up to $20 lived. 
 
 [This](https://www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html) New York Times Upshot article called _"The True Colors of America's Political Spectrum Are Gray and Green"_ examines how satellite images of the United States tend to be accurate indicators of voting patterns. In the 2016 election, places with more greenery (often rural areas) leaned towards Trump, while places with more gray in the satellite images (indicating roads and buildings) leaned towards Clinton. An extension of this project could be examining how the average number and value of expenditures for each candidate varies across the satellite image color spectrum.
 
 ## Individual Contributions Breakdown
-This bar graph illustrates the total number of individual contributions, in millions, broken down by different expenditure thresholds for both Donald Trump and Joe Biden. Joe Biden received the most total donations for four of the five spending brackets. Donald Trump garnered more contributions only in the \$200.01 to \$499.99 range.
+This bar graph illustrates the total number of individual contributions, in millions, broken down by different expenditure thresholds for both Donald Trump and Joe Biden. 
+
+- For both candidates, the most contributions were made in the $200 and under category.
+- Joe Biden received the most total donations for four of the five spending brackets.
+- Donald Trump garnered more contributions only in the \$200.01 to \$499.99 range.
 
 The limitation of this bar graph is that it does not tell us the number of donations made for each candidate. It is quite plausible that Trump had more donors than Biden in certain brackets, but these donors gave at the lower bound of the range, resulting in a lower overall total. I would be interested in acquiring data that show the number and exact value of each individual donation within specific spending ranges.
 
@@ -188,16 +193,21 @@ contribution_breakdown_clean <- contribution_breakdown %>%
   filter(candidate != "Michael Bloomberg") %>%
   filter(candidate != "Kamala Harris")
 
+contribution_breakdown_clean$category_level = factor(contribution_breakdown_clean$category, levels=c('$200 and under','$200.01—$499.99','$500—$999.99','$1,000—$1,999.99', '$2,000 and over'))
+
 
 ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=contribution/1000000,fill = candidate)) +
-  facet_wrap(~category) +
+  facet_wrap(~category_level) +
   geom_bar(stat="identity") +
   scale_fill_manual(values = c("#a62c2b", "#4682B4")) +
   ylab("Contribution (Millions)") +
   xlab("") +
   theme(legend.position = "none") +
   theme(strip.text.x = element_text(size = 12)) +
-  theme(axis.text.x = element_text(size = 12))
+  theme(axis.text.x = element_text(size = 12)) +
+  theme(axis.title.y = element_text(size = 16)) +
+  ggtitle("Individual Contributions by Donation Bracket") +
+  theme(plot.title = element_text(size = 20))
 ```
 
 ### Conclusion

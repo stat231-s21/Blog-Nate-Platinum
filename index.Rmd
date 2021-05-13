@@ -213,17 +213,45 @@ ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=contribution/1000
   theme(plot.title = element_text(size = 20))
 ```
 
-### Animated Bar Graph
+### 5 College Donations - Employees living in Amherst
 ```{r, message = FALSE, echo=FALSE}
 library(tidyverse)
 library(gganimate)
 
 amherst_donations <- read_csv(here("Data", "AmherstDonations.csv"))
 
-amherst_donations <- amherst_donations %>%
-  filter(contributor_employer == "AMHERST COLLEGE")
+amherstcol_donations <- amherst_donations %>%
+  filter(contributor_employer == "AMHERST COLLEGE") %>%
+  filter(committee_name != "WIN THE ERA PAC")
 
-ggplot(data = amherst_donations, aes(x = contribution_receipt_date, y = contribution_receipt_amount, color = committee_name)) + geom_point()
+ggplot(data = amherstcol_donations, aes(x = contribution_receipt_date, y = contribution_receipt_amount, color = committee_name)) + geom_point() + scale_color_manual(values = c( "#228b22","#add8e6", "#00008b", "#ffa500"))
+
+mtholyoke_donations <- amherst_donations %>%
+  filter(contributor_employer == "MOUNT HOLYOKE COLLEGE")
+
+ggplot(data = mtholyoke_donations, aes(x = contribution_receipt_date, y = contribution_receipt_amount, color = committee_name)) + geom_point() + scale_color_manual(values = c("#add8e6", "#00008b", "#ffa500"))
+
+umass_donations <- amherst_donations %>%
+  mutate(umass_employer = (case_when(
+         str_detect(contributor_employer, "UMASS") ~ "UMASS",
+         str_detect(contributor_employer, "UMASS-AMHERST") ~ "UMASS",
+         str_detect(contributor_employer, "ISENBERG SOM UMASS") ~ "UMASS",
+         str_detect(contributor_employer, "UMASS AMHERST") ~ "UMASS",
+         str_detect(contributor_employer, "UMASSFIVE FCU") ~ "UMASS",
+         str_detect(contributor_employer, "UMASSFIVE") ~ "UMASS",
+         str_detect(contributor_employer, "UMASS TRANSIT") ~ "UMASS",
+         str_detect(contributor_employer, "UMASS DONAHUE INSTITUTE") ~ "UMASS",
+         str_detect(contributor_employer, "UNIVERSITY OF MASSACHUSETTS AMHERST") ~ "UMASS",
+         str_detect(contributor_employer, "UNIVERSITY OF MASSACHUSETTS") ~ "UMASS",
+         str_detect(contributor_employer, "UNIVERSITY OF MASSACHUSETTS DONAHUE IN") ~ "UMASS",
+         str_detect(contributor_employer, "UNIVERSITY OF MASSACHUSETTS-AMHERST") ~ "UMASS",
+         str_detect(contributor_employer, "UNIVERSITY OF MASSACHUSETTS") ~ "UMASS"
+         ))) %>%
+   filter(committee_name != "BENNET FOR AMERICA") %>%
+   filter(committee_name != "BULLOCK FOR PRESIDENT") %>%
+   filter(committee_name != "BENNET FOR AMERICA") %>%
+
+ggplot(data = umass_donations, aes(x = contribution_receipt_date, y = contribution_receipt_amount, color = committee_name)) + geom_point()
 ```
 
 

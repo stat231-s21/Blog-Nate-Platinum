@@ -152,32 +152,30 @@ independent_expenditures %>%
 
 
 ```{r}
-# Interactive Network
-library(visNetwork)
-library(gdata)
+contribution_breakdown <- read_csv(here("Data", "ContributionBreakdown.csv"))
 
-make_network <- function(network) {
+contribution_breakdown_clean <- contribution_breakdown %>%
+  pivot_longer(!Candidate, names_to = "Category", values_to = "Contribution") %>%
+  janitor::clean_names() %>%
+  filter(candidate != "Bernie Sanders") %>%
+  filter(candidate != "Elizabeth Warren") %>%
+  filter(candidate != "Andrew Yang") %>%
+  filter(candidate != "Amy Klobuchar") %>%
+  filter(candidate != "Tom Steyer") %>%
+  filter(candidate != "Michael Bloomberg") %>%
+  filter(candidate != "Kamala Harris")
 
-name_vec <- name_vec <- c.factor(unique(c.factor(unique(independent_expenditures$candidate_name), 
-                     unique(independent_expenditures$committee_name))))
+
+ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=contribution/1000000,fill = candidate)) +
+  facet_wrap(~category) +
+  geom_bar(stat="identity") +
+  scale_fill_manual(values = c("#a62c2b", "#4682B4")) +
+  ylab("Contribution (Millions)") +
+  xlab("") +
+  theme(legend.position = "none")
 
 
-from <- independent_expenditures$committee_name
-to <- independent_expenditures$candidate_name
 
-edges <- data.frame(from = from, to = to, value = support_oppose_indicator)
-nodes <- data.frame(id = name_vec, label = name_vec, group = name_vec)
 
-# network visualizations
-  visNetwork(nodes, edges, height = "500px", width = "100%")  %>% 
-    visNodes(shape = "dot") %>%  
-             # arrows show exports
-    visEdges(arrows = "to", arrowStrikethrough = F, smooth = T, physics = F) %>%
-    # hide other nodes and incoming edges when a node is selected
-    visOptions(highlightNearest = list(enabled = T, degree = 0)) %>%
-    # add navigation buttons and allow multiple nodes to be selected at once
-    visInteraction(navigationButtons = TRUE, multiselect = TRUE) %>%
-  visLayout(randomSeed = 17)
-  }
 ```
 

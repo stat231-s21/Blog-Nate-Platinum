@@ -27,33 +27,10 @@ library(scales)
 library(DT)
 ```
 
-# Header 1
-
-## Header 2
-
-### Header 3
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For example, you can include **Bold** and _Italic_ and `Code` text.  For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-You should test out updating your GitHub Pages website:
-
-- clone your group's blog project repo in RStudio
-- update "Your Project Title Here" to a new title in the YAML header
-- knit `index.Rmd` 
-- commit and push BOTH the `index.Rmd` and the `index.html` files
-- go to https://stat231-s21.github.io/Blog-Nate-Platinum/ to see the published test document (this is publicly available!)
-
-
-Let's clean up the format of that output:
-
-In a study from the 1920s, fifty cars were used to see how the speed of the car and the distance taken to stop were related.  Speeds ranged between `r min(cars$speed)` and `r max(cars$speed)` mph.  Distances taken to stop ranged between `r min(cars$dist)` and `r max(cars$dist)` feet, with the middle 50% falling between `r as.numeric(quantile(cars$dist)[2])` and `r as.numeric(quantile(cars$dist)[4])` feet.  
-
-You can also embed plots as normal, for example:
-
 ## Introduction
 ![Image](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/Spending.png)
 We live in a world where money and politics are largely intertwined. This fact is starkly apparent when examining the net worth of certain 2020 presidential candidates. Michael Bloomberg, who has a net worth of \$59 billion, spent over \$1 billion on his own candidacy. Tom Steyer, a former hedge fund manager and billionaire, also made a run for President. The 45th President, Donald Trump, made a fortune through his real estate empire, allocating millions to his campaign. The 2020 election, including both presidential and congressional races, cost a record-breaking <span style="color:red">*$14 billion*</span>
-. Aside from candidates' own wealth, **where is the rest of this campaign money coming from?** I set out to address questions pertaining to 2020 election finances, seeking to understand who is making political donations and to whom they are supporting. The three datasets I used were all from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/), and focused on independent expenditures, individual contributions by state, and individual contributions broken down by expenditure level.
+. Aside from candidates' own wealth, **where is the rest of this campaign money coming from?** I set out to address questions pertaining to 2020 election finances, seeking to understand who is making political donations and to whom they are supporting. The three main datasets I used were all from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/), and focused on independent expenditures, individual contributions by state, and individual contributions broken down by expenditure level. The last dataset, which has observations for each contribution made by a person living in Amherst from 2019-2020 (85,662 observations), was a filtered version of [this](https://www.fec.gov/data/receipts/individual-contributions/?recipient_committee_type=P&contributor_zip=01002&contributor_city=Amherst&two_year_transaction_period=2020) entire individual contributions dataset.
 
 ## Independent Expenditures for Joe Biden & Donald Trump
 
@@ -262,26 +239,10 @@ ggplot(data = umass_donations, aes(x = contribution_receipt_date, y = contributi
 
 
 ### Citations
-- “2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/. 
-- Wilke, Claus. “Relayer.” GitHub, github.com/clauswilke/relayer.
-- Wallace, Tim, and Krishna Karra. “The True Colors of America's Political Spectrum Are Gray and Green.” The New York Times, The New York Times, 2 Sept. 2020, www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html. 
+- “Browse Individual Contributions.” FEC.gov, www.fec.gov/data/receipts/individual-contributions/?recipient_committee_type=P&amp;contributor_zip=01002&amp;contributor_city=Amherst&amp;two_year_transaction_period=2020. 
 - Horncastle, William C.R. “The Scale of US Election Spending Explained in Five Graphs.” The Conversation, 22 Jan. 2021, theconversation.com/the-scale-of-us-election-spending-explained-in-five-graphs-130651. 
+- Wallace, Tim, and Krishna Karra. “The True Colors of America's Political Spectrum Are Gray and Green.” The New York Times, The New York Times, 2 Sept. 2020, www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html. 
+- Wilke, Claus. “Relayer.” GitHub, github.com/clauswilke/relayer.
+- “2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/. 
 
-
-## Bulleted list
-
-You can make a bulleted list like this:
-
-- item 1
-- item 2
-- item 3
-
-
-## Numbered list
-
-You can make a numbered list like this
-
-1. First thing I want to say
-2. Second thing I want to say
-3. Third thing I want to say
 

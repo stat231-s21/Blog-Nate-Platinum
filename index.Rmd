@@ -51,11 +51,12 @@ In a study from the 1920s, fifty cars were used to see how the speed of the car 
 You can also embed plots as normal, for example:
 
 ## Introduction
-We live in a world where money and politics are largely intertwined. This fact is starkly apparent when examining the net worth of certain 2020 presidential candidates. Michael Bloomberg, who has a net worth of \$59 billion, spent over \$1 billion on his own candidacy. Tom Steyer, a former hedge fund manager and billionaire, also made a run for President. The 45th President, Donald Trump, made a fortune through his real estate empire, allocating millions to his campaign. The 2020 election, including both presidential and congressional races, cost a record-breaking $14 billion. Aside from candidates' own wealth, **where is the rest of this campaign money coming from?** We set out to address questions pertaining to 2020 election finance data, seeking to understand who is making political donations and to whom they are supporting.
+![Image](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/Spending.png)
+We live in a world where money and politics are largely intertwined. This fact is starkly apparent when examining the net worth of certain 2020 presidential candidates. Michael Bloomberg, who has a net worth of \$59 billion, spent over \$1 billion on his own candidacy. Tom Steyer, a former hedge fund manager and billionaire, also made a run for President. The 45th President, Donald Trump, made a fortune through his real estate empire, allocating millions to his campaign. The 2020 election, including both presidential and congressional races, cost a record-breaking $14 billion. Aside from candidates' own wealth, **where is the rest of this campaign money coming from?** I set out to address questions pertaining to 2020 election finance data, seeking to understand who is making political donations and to whom they are supporting. The three datasets I used were all from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/), and focused on independent expenditures, individual contributions by state, and individual contributions broken down by expenditure level.
 
 ## Independent Expenditures for Joe Biden & Donald Trump
 
-We obtained data from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/) to determine how much money different organizations spent either supporting or opposing Joe Biden and Donald Trump, the two main presidential candidates in the 2020 general election. The dataset, called "IndependentExpenditures.csv", contained 863 observations, indicating that there were expenditures from 863 organizations, ranging in size from $2.80 to over $133 million. In order to make a network visualizing the connections between different organizations and the two candidates, we filtered the data to include only donations that were greater than $10 million.
+I used one dataset, entitled "IndependentExpenditures.csv", to understand how much money different organizations spent either supporting or opposing Joe Biden and Donald Trump, the two main presidential candidates in the 2020 general election. The dataset contained 863 observations, indicating that there were expenditures from 863 organizations, ranging in size from $2.80 to over $133 million. In order to make a network visualizing the connections between different organizations and the two candidates, I filtered the data to include only donations that were larger than $10 million.
 
 ```{r fig.width = 35, fig.height = 15, message = FALSE, echo=FALSE}
 independent_expenditures <- read_csv(here("Data", "IndependentExpenditures.csv"))
@@ -149,10 +150,7 @@ independent_expenditures %>%
 
 ## Individual Contributions
 
-Besides PACs and Super PACs, a significant portion of campaign spending comes from individual contributions. Which candidates amassed the most support from the general public, and which states spent the most on individual contributions?
-
-<iframe height="400" width="100%" frameborder="no" src="http://sedelson31.shinyapps.io/IndividualContributionsMap"> </iframe>
-
+Besides PACs and Super PACs, a significant portion of campaign spending comes from individual contributions. Which candidates amassed the most support from the general public, and which states had the largest total individual contributions?
 
 ![This is a static image of the interactive map, outining total individual contributions by state for different candidates. The map was created using the "IndividualContributions.csv" dataset, which I converted to a long format so that each observation included the state, state contribution, and candidate. ](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/MapImage.png)
 
@@ -172,6 +170,9 @@ This map only conveys totals for each state, but we would be interested in furth
 [This](https://www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html) New York Times Upshot article called _"The True Colors of America's Political Spectrum Are Gray and Green"_ examines how satellite images of the United States tend to be accurate indicators of voting patterns. In the 2016 election, places with more greenery (often rural areas) leaned towards Trump, while places with more gray in the satellite images (indicating roads and buildings) leaned towards Clinton. An extension of this project could be examining how the average number and value of expenditures for each candidate varies across the satellite image color spectrum.
 
 ## Individual Contributions Breakdown
+This bar graph illustrates the total number of individual contributions, in millions, broken down by different expenditure thresholds for both Donald Trump and Joe Biden. Joe Biden received the most total donations for four of the five spending brackets. Donald Trump garnered more contributions only in the \$200.01 to \$499.99 range.
+
+The limitation of this bar graph is that it does not tell us the number of donations made for each candidate. It is quite plausible that Trump had more donors than Biden in certain brackets, but these donors gave at the lower bound of the range, resulting in a lower overall total. I would be interested in acquiring data that show the number and exact value of each individual donation within specific spending ranges.
 
 ```{r fig.width = 15, fig.height = 8, message = FALSE, echo=FALSE}
 contribution_breakdown <- read_csv(here("Data", "ContributionBreakdown.csv"))
@@ -197,26 +198,18 @@ ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=contribution/1000
   theme(legend.position = "none") +
   theme(strip.text.x = element_text(size = 12)) +
   theme(axis.text.x = element_text(size = 12))
-
 ```
 
+### Conclusion
 
-## Including links and images
-
-You can include [Links](https://www.datadreaming.org/post/r-markdown-theme-gallery/) and images ![team logo](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/S1-politics.jpg)
-
-You can embed a gif.
-
-![pugs](https://media.giphy.com/media/XHVmD4RyXgSjd8aUMb/giphy.gif)
-
-### Limitations
 
 ### Citations
 -“2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/. 
--Wilke, Claus. “Relayer.” GitHub, github.com/clauswilke/relayer. 
+-Wilke, Claus. “Relayer.” GitHub, github.com/clauswilke/relayer.
+-Wallace, Tim, and Krishna Karra. “The True Colors of America's Political Spectrum Are Gray and Green.” The New York Times, The New York Times, 2 Sept. 2020, www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html. 
 
+https://theconversation.com/the-scale-of-us-election-spending-explained-in-five-graphs-130651
 
-# You can even create tabs if you want! {.tabset .tabset-fade .tabset-pills}
 
 ## Bulleted list
 

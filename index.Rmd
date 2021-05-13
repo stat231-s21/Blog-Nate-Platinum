@@ -1,6 +1,6 @@
 ---
 title: "Presidential Election Finance Data"
-author: "Sarah Edelson, Seamus Lawton, Matthew Perkins"
+author: "Sarah Edelson"
 output:
   prettydoc::html_pretty:
     theme: architect

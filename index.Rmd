@@ -53,7 +53,7 @@ You can also embed plots as normal, for example:
 ## Introduction
 ![Image](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/Spending.png)
 We live in a world where money and politics are largely intertwined. This fact is starkly apparent when examining the net worth of certain 2020 presidential candidates. Michael Bloomberg, who has a net worth of \$59 billion, spent over \$1 billion on his own candidacy. Tom Steyer, a former hedge fund manager and billionaire, also made a run for President. The 45th President, Donald Trump, made a fortune through his real estate empire, allocating millions to his campaign. The 2020 election, including both presidential and congressional races, cost a record-breaking <span style="color:red">*$14 billion*</span>
-. Aside from candidates' own wealth, **where is the rest of this campaign money coming from?** I set out to address questions pertaining to 2020 election finance data, seeking to understand who is making political donations and to whom they are supporting. The three datasets I used were all from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/), and focused on independent expenditures, individual contributions by state, and individual contributions broken down by expenditure level.
+. Aside from candidates' own wealth, **where is the rest of this campaign money coming from?** I set out to address questions pertaining to 2020 election finances, seeking to understand who is making political donations and to whom they are supporting. The three datasets I used were all from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/), and focused on independent expenditures, individual contributions by state, and individual contributions broken down by expenditure level.
 
 ## Independent Expenditures for Joe Biden & Donald Trump
 
@@ -170,8 +170,8 @@ This map only conveys totals for each state, but I would be interested in furthe
 
 [This](https://www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html) New York Times Upshot article called _"The True Colors of America's Political Spectrum Are Gray and Green"_ examines how satellite images of the United States tend to be accurate indicators of voting patterns. In the 2016 election, places with more greenery (often rural areas) leaned towards Trump, while places with more gray in the satellite images (indicating roads and buildings) leaned towards Clinton. An extension of this project could be examining how the average number and value of expenditures for each candidate varies across the satellite image color spectrum.
 
-[](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/NYTimes1.png)
-[](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/NYTimes2.png)
+![](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/NYTimes1.png)
+![](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/NYTimes2.png)
 
 ## Individual Contributions Breakdown
 This bar graph illustrates the total number of individual contributions, in millions, broken down by different expenditure thresholds for both Donald Trump and Joe Biden. 
@@ -213,15 +213,30 @@ ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=contribution/1000
   theme(plot.title = element_text(size = 20))
 ```
 
+### Animated Bar Graph
+```{r, message = FALSE, echo=FALSE}
+library(tidyverse)
+library(gganimate)
+
+amherst_donations <- read_csv(here("Data", "AmherstDonations.csv"))
+
+amherst_donations <- amherst_donations %>%
+  filter(contributor_employer == "AMHERST COLLEGE")
+
+ggplot(data = amherst_donations, aes(x = contribution_receipt_date, y = contribution_receipt_amount, color = committee_name)) + geom_point()
+```
+
+
+
+
 ### Conclusion
 
 
 ### Citations
--“2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/. 
--Wilke, Claus. “Relayer.” GitHub, github.com/clauswilke/relayer.
--Wallace, Tim, and Krishna Karra. “The True Colors of America's Political Spectrum Are Gray and Green.” The New York Times, The New York Times, 2 Sept. 2020, www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html. 
-
-https://theconversation.com/the-scale-of-us-election-spending-explained-in-five-graphs-130651
+- “2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/. 
+- Wilke, Claus. “Relayer.” GitHub, github.com/clauswilke/relayer.
+- Wallace, Tim, and Krishna Karra. “The True Colors of America's Political Spectrum Are Gray and Green.” The New York Times, The New York Times, 2 Sept. 2020, www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html. 
+- Horncastle, William C.R. “The Scale of US Election Spending Explained in Five Graphs.” The Conversation, 22 Jan. 2021, theconversation.com/the-scale-of-us-election-spending-explained-in-five-graphs-130651. 
 
 
 ## Bulleted list

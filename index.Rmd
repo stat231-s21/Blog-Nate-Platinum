@@ -237,10 +237,11 @@ umass_donations <- amherst_donations %>%
 
 ggplot(data = umass_donations, aes(x = contribution_receipt_date, y = contribution_receipt_amount, color = committee_name)) + geom_point(size = 3) + ylim(0, 3000) + scale_color_manual(values = c("#add8e6", "#00008b", "#ff0000", "#9b870c", "#B19CD9", "#ffa500")) + ylab("Contribution Amount ($)") + xlab("Date") + labs(color = "Committee Name") + theme_wsj(base_size = 12, color = "gray") + ggtitle("UMass Employee Donations") +   guides(color = guide_legend(override.aes = list(size = 8))) + theme(legend.text = element_text(size = 14))
 ```
-This scatter plot shows all 2019-2020 donations made by individuals who are UMass employees residing in Amherst. Similar to Amherst College employees, many early donations were made to Elizabeth Warren and Bernie, while many more donations were made to Joe Biden post-primaries. In total, 195 donations were made to Biden, while 17 donations were made to Trump.
+
+This scatter plot shows all 2019-2020 donations made by individuals who are UMass employees residing in Amherst. Similar to Amherst College employees, many early donations were made to Elizabeth Warren and Bernie Sanders, while many more donations were made to Joe Biden post-primaries. In total, 195 donations were made to Biden, while 17 donations were made to Trump.
 
 ### Conclusion
-
+This project explores 2020 election finance information at many levels, examining expenditures on both a macro and micro scale. The network and table convey information about expenditures by PACs and Super PACS, the map shows aggregated individual contributions by state, and the scatter plots display individual contributions from Amherst College and UMass employees who live in Amherst.
 
 ### Citations
 - “Browse Individual Contributions.” FEC.gov, www.fec.gov/data/receipts/individual-contributions/?recipient_committee_type=P&amp;contributor_zip=01002&amp;contributor_city=Amherst&amp;two_year_transaction_period=2020. 

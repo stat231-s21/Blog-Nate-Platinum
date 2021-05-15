@@ -28,7 +28,7 @@ library(DT)
 ```
 
 ## Introduction
-![Image](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/Spending.png)
+![](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/Spending.png)
 
 
 We live in a world where money and politics are largely intertwined. This fact is starkly apparent when examining the net worth of certain 2020 presidential candidates. Michael Bloomberg, who has a net worth of \$59 billion, spent over \$1 billion on his own candidacy. Tom Steyer, a former hedge fund manager and billionaire, also made a run for President. The 45th President, Donald Trump, made a fortune through his real estate empire, allocating millions to his campaign. The 2020 election, including both presidential and congressional races, cost a record-breaking <span style="color:red">*$14 billion*</span>
@@ -243,11 +243,13 @@ ggplot(data = umass_donations, aes(x = contribution_receipt_date, y = contributi
 This scatter plot shows all 2019-2020 donations made by individuals who are UMass employees residing in Amherst. Similar to Amherst College employees, many early donations were made to Elizabeth Warren and Bernie Sanders, while many more donations were made to Joe Biden post-primaries. In total, 195 donations were made to Biden, while 17 donations were made to Trump.
 
 ### Conclusion
-This project explores 2020 election finance information at many levels, examining expenditures on both a macro and micro scale. The network and table convey information about expenditures by PACs and Super PACS, the map shows aggregated individual contributions by state, and the scatter plots display individual contributions from Amherst College and UMass employees who live in Amherst.
+This project explores 2020 election finance information at many levels, examining expenditures on both a macro and micro scale. The network and table convey information about expenditures by PACs and Super PACS, the map shows aggregated individual contributions by state, and the scatter plots display individual contributions from Amherst College and UMass employees who live in Amherst. While many people believe that large organizations and Super PACs comprise the majority of campaign spending, in reality, individual contributions are the most important. In 2020, organizations and 8.13% of funds were from PACs and organizations and 13.01% were from self-funding, while 63.93% were from individual donations (with the last 14.93% labeled as "other"). Thus, it is important to recognize the critical role that the general public has in the electoral process, both from a voting and a spending perspective. Ultimately, I 
 
 ### Citations
 - “Browse Individual Contributions.” FEC.gov, www.fec.gov/data/receipts/individual-contributions/?recipient_committee_type=P&amp;contributor_zip=01002&amp;contributor_city=Amherst&amp;two_year_transaction_period=2020. 
 - Schwartz, Brian. “Total 2020 Election Spending to Hit Nearly $14 Billion, More than Double 2016's Sum.” CNBC, CNBC, 2 Nov. 2020, www.cnbc.com/2020/10/28/2020-election-spending-to-hit-nearly-14-billion-a-record.html. 
 - Wallace, Tim, and Krishna Karra. “The True Colors of America's Political Spectrum Are Gray and Green.” The New York Times, The New York Times, 2 Sept. 2020, www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html. 
 - Wilke, Claus. “Relayer.” GitHub, github.com/clauswilke/relayer.
-- “2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/. 
+- “2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/.
+
+https://www.opensecrets.org/news/2020/10/cost-of-2020-election-14billion-update/

@@ -247,10 +247,7 @@ This project explores 2020 election finance information at many levels, examinin
 
 ### Citations
 - “Browse Individual Contributions.” FEC.gov, www.fec.gov/data/receipts/individual-contributions/?recipient_committee_type=P&amp;contributor_zip=01002&amp;contributor_city=Amherst&amp;two_year_transaction_period=2020. 
+- Schwartz, Brian. “Total 2020 Election Spending to Hit Nearly $14 Billion, More than Double 2016's Sum.” CNBC, CNBC, 2 Nov. 2020, www.cnbc.com/2020/10/28/2020-election-spending-to-hit-nearly-14-billion-a-record.html. 
 - Wallace, Tim, and Krishna Karra. “The True Colors of America's Political Spectrum Are Gray and Green.” The New York Times, The New York Times, 2 Sept. 2020, www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html. 
 - Wilke, Claus. “Relayer.” GitHub, github.com/clauswilke/relayer.
 - “2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/. 
-
--https://www.cnbc.com/2020/10/28/2020-election-spending-to-hit-nearly-14-billion-a-record.html
-
-

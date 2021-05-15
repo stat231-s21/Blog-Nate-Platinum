@@ -29,6 +29,8 @@ library(DT)
 
 ## Introduction
 ![Image](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/Spending.png)
+
+
 We live in a world where money and politics are largely intertwined. This fact is starkly apparent when examining the net worth of certain 2020 presidential candidates. Michael Bloomberg, who has a net worth of \$59 billion, spent over \$1 billion on his own candidacy. Tom Steyer, a former hedge fund manager and billionaire, also made a run for President. The 45th President, Donald Trump, made a fortune through his real estate empire, allocating millions to his campaign. The 2020 election, including both presidential and congressional races, cost a record-breaking <span style="color:red">*$14 billion*</span>
 . Aside from candidates' own wealth, **where is the rest of this campaign money coming from?** I set out to address questions pertaining to 2020 election finances, seeking to understand who is making political donations and to whom they are supporting. The three main datasets I used were all from the [Federal Election Commission](https://www.fec.gov/data/elections/president/2020/), and focused on independent expenditures, individual contributions by state, and individual contributions broken down by expenditure level. The last dataset, which has observations for each contribution made by a person living in Amherst from 2019-2020 (85,662 observations), was a filtered version of [this](https://www.fec.gov/data/receipts/individual-contributions/?recipient_committee_type=P&contributor_zip=01002&contributor_city=Amherst&two_year_transaction_period=2020) entire individual contributions dataset.
 
@@ -204,7 +206,7 @@ ggplot(data = amherstcol_donations, aes(x = contribution_receipt_date, y = contr
 
 ```
 
-This scatter plot shows all 2019-2020 donations made by individuals who are Amherst College employees residing in Amherst. It seems that in the early days of the primaries, many Amherst College employees were optimistic that Elizabeth Warren would clinch the Democratic nomination, as most of the donations between June 2019 and January 2020 were to Warren For President, Inc. There were also quite a few donations to Bernie during this time frame. Once Biden clinched the Democratic nomination in the August 2020 primaries, donations for Biden came flooding. No Amherst College employees residing in Amherst donated to Trump. Many of the donations remained in the \$200 and under range, with donation size increasing as the election drew closer. The largest donation was $1000.
+This scatter plot shows all 2019-2020 donations made by individuals who are Amherst College employees residing in Amherst. It seems that in the early days of the primaries, many Amherst College employees were optimistic that Elizabeth Warren would clinch the Democratic nomination, as most of the donations between June 2019 and January 2020 were to Warren For President, Inc. There were also quite a few donations to Bernie Sanders during this time frame. Once Biden clinched the Democratic nomination in the August 2020 primaries, donations for Biden came flooding. No Amherst College employees residing in Amherst donated to Trump. Many of the donations remained in the \$200 and under range, with donation size increasing as the election drew closer. The largest donation was $1000.
 
 
 ```{r, warning = FALSE, message = FALSE, echo=FALSE, fig.width = 15, fig.height = 8}
@@ -245,9 +247,10 @@ This project explores 2020 election finance information at many levels, examinin
 
 ### Citations
 - “Browse Individual Contributions.” FEC.gov, www.fec.gov/data/receipts/individual-contributions/?recipient_committee_type=P&amp;contributor_zip=01002&amp;contributor_city=Amherst&amp;two_year_transaction_period=2020. 
-- Horncastle, William C.R. “The Scale of US Election Spending Explained in Five Graphs.” The Conversation, 22 Jan. 2021, theconversation.com/the-scale-of-us-election-spending-explained-in-five-graphs-130651. 
 - Wallace, Tim, and Krishna Karra. “The True Colors of America's Political Spectrum Are Gray and Green.” The New York Times, The New York Times, 2 Sept. 2020, www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html. 
 - Wilke, Claus. “Relayer.” GitHub, github.com/clauswilke/relayer.
 - “2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/. 
+
+-https://www.cnbc.com/2020/10/28/2020-election-spending-to-hit-nearly-14-billion-a-record.html
 
 

@@ -150,14 +150,6 @@ This map only conveys totals for each state, but I would be interested in furthe
 [This](https://www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html) New York Times Upshot article called _"The True Colors of America's Political Spectrum Are Gray and Green"_ examines how satellite images of the United States tend to be accurate indicators of voting patterns. In the 2016 election, places with more greenery (often rural areas) leaned towards Trump, while places with more gray in the satellite images (indicating roads and buildings) leaned towards Clinton. An extension of this project could be examining how the average number and value of expenditures for each candidate varies across the satellite image color spectrum.
 
 ## Individual Contributions Breakdown
-This bar graph illustrates the total number of individual contributions, in millions, broken down by different expenditure thresholds for both Donald Trump and Joe Biden. 
-
-- For both candidates, the most contributions were made in the $200 and under category.
-- Joe Biden received the most total donations for four of the five spending brackets.
-- Donald Trump garnered more contributions only in the \$200.01 to \$499.99 range.
-
-The limitation of this bar graph is that it does not tell us the number of donations made for each candidate. It is quite plausible that Trump had more donors than Biden in certain brackets, but these donors gave at the lower bound of the range, resulting in a lower overall total. I would be interested in acquiring data that show the number and exact value of each individual donation within specific spending ranges.
-
 ```{r fig.width = 15, fig.height = 8, message = FALSE, echo=FALSE}
 contribution_breakdown <- read_csv(here("Data", "ContributionBreakdown.csv"))
 
@@ -188,6 +180,14 @@ ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=contribution/1000
   ggtitle("Individual Contributions by Donation Bracket") +
   theme(plot.title = element_text(size = 20))
 ```
+
+This bar graph illustrates the total number of individual contributions, in millions, broken down by different expenditure thresholds for both Donald Trump and Joe Biden. 
+
+- For both candidates, the most contributions were made in the $200 and under category.
+- Joe Biden received the most total donations for four of the five spending brackets.
+- Donald Trump garnered more contributions only in the \$200.01 to \$499.99 range.
+
+The limitation of this bar graph is that it does not tell us the number of donations made for each candidate. It is quite plausible that Trump had more donors than Biden in certain brackets, but these donors gave at the lower bound of the range, resulting in a lower overall total. I would be interested in acquiring data that show the number and exact value of each individual donation within specific spending ranges.
 
 ### Donations from UMass & Amherst College Employees (who live in Amherst) to Main Candidates
 ```{r, warning = FALSE, message = FALSE, echo=FALSE, fig.width = 15, fig.height = 8}

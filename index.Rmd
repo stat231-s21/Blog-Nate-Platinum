@@ -111,7 +111,7 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
 The network indicates that:
 
 - The largest donors were skewed more towards Biden then Trump. Biden received support from six organizations, while Trump received support from two. Five organizations opposed Biden while six opposed Trump. 
-- Two organizations spent money supporting one candidate and opposing the other: the **FF Pac** made expenditures supporting Joe Biden and opposing Donald Trump, while **Priorities USA Action** did the opposite.
+- Two organizations spent money supporting one candidate and opposing the other: the **FF Pac** and **Priorities USA Action** made expenditures supporting Joe Biden and opposing Donald Trump
 - Candidate priorities align with donors. Conservatives have historically been large advocates for gun rights, explaining why the **NRA Victory Fund** would oppose Biden. Democrats are more invested in combating problems pertaining to climate change and environmental justice, leading the **NextGen Climate Action Committee** to support Biden.
 
 Moving forward, it would be interesting to examine how the number of PACs/organizations and their missions differ at different levels of expenditures.
@@ -143,7 +143,7 @@ The map shows that:
 
 - Joe Biden received the most contributions from **California** and **New York**. 
 
-- Certain candidates who lost in the primaries tended to receive most of their contributions from the states which they have served. For example, Kalama Harris was a California senator and acquired most of her donations from that state. Amy Klobuchar received the most contributions from Minnesota, where she was a senator. Massachusetts senator Elizabeth Warren also obtained a majority of her contributions from her home state.
+- Certain candidates who lost in the primaries tended to receive most of their contributions from the states which they have served. For example, Kamala Harris was a California senator and acquired most of her donations from that state. Amy Klobuchar received the most contributions from Minnesota, where she was a senator. Massachusetts senator Elizabeth Warren also obtained a majority of her contributions from her home state.
 
 This map only conveys totals for each state, but I would be interested in further analyzing the average contribution across states, or even more specific municipal levels, in addition to other demographic factors influencing donations. For example, we could test the belief that lower-income, people residing in rural areas tend to support Trump by examining where many of the people that donated up to $20 lived. 
 
@@ -206,7 +206,7 @@ ggplot(data = amherstcol_donations, aes(x = contribution_receipt_date, y = contr
 
 ```
 
-This scatter plot shows all 2019-2020 donations made by individuals who are Amherst College employees residing in Amherst. It seems that in the early days of the primaries, many Amherst College employees were optimistic that Elizabeth Warren would clinch the Democratic nomination, as most of the donations between June 2019 and January 2020 were to Warren For President, Inc. There were also quite a few donations to Bernie Sanders during this time frame. Once Biden clinched the Democratic nomination in the August 2020 primaries, donations for Biden came flooding. No Amherst College employees residing in Amherst donated to Trump. Many of the donations remained in the \$200 and under range, with donation size increasing as the election drew closer. The largest donation was $1000.
+This scatter plot shows all 2019-2020 donations made by individuals who are Amherst College employees residing in Amherst. It seems that in the early days of the primaries, many Amherst College employees were optimistic that Elizabeth Warren would clinch the Democratic nomination, as most of the donations between June 2019 and January 2020 were to Warren For President, Inc. There were also quite a few donations to Bernie Sanders during this time frame. Once Biden clinched the Democratic nomination in the August 2020 primaries, donations for Biden came flooding in. No Amherst College employees residing in Amherst donated to Trump. Many of the donations remained in the \$200 and under range, with donation size increasing as the election drew closer. One outlier not shown on the plot was a \$1000 donation.
 
 
 
@@ -245,7 +245,7 @@ ggplot(data = umass_donations, aes(x = contribution_receipt_date, y = contributi
 This scatter plot shows all 2019-2020 donations made by individuals who are UMass employees residing in Amherst. Similar to Amherst College employees, many early donations were made to Elizabeth Warren and Bernie Sanders, while many more donations were made to Joe Biden post-primaries. In total, 195 donations were made to Biden, while 17 donations were made to Trump.
 
 ### Conclusion
-This project explores 2020 election finance information at many levels, examining expenditures on both a macro and micro scale. The network and table convey information about expenditures by PACs and Super PACS, the map shows aggregated individual contributions by state, and the scatter plots display individual contributions from Amherst College and UMass employees who live in Amherst. While many people believe that large organizations and Super PACs comprise the majority of campaign spending, in reality, individual contributions are the most important. In 2020, organizations and 8.13% of funds were from PACs and organizations and 13.01% were from self-funding, while 63.93% were from individual donations (with the last 14.93% labeled as "other"). Ultimately, it is important to recognize the critical role that the general public has in the electoral process, both from a voting and a spending perspective.
+This project explores 2020 election finance information at many levels, examining expenditures on both a macro and micro scale. The network and table convey information about expenditures by PACs and Super PACS, the map shows aggregated individual contributions by state, and the scatter plots display individual contributions from Amherst College and UMass employees who live in Amherst. While many people believe that large organizations and Super PACs comprise the majority of campaign spending, in reality, individual contributions are the most important. In 2020, organizations and 8.13% of funds were from PACs and organizations and 13.01% were from self-funding, while 63.93% were from individual donations (with the last 14.93% labeled as "other"). Ultimately, it is important to recognize the critical role that the general public has in the electoral process, not only from a voting perspective, but from a spending perspective.
 
 ### Citations
 - “2020 Election to Cost $14 Billion, Blowing Away Spending Records.” OpenSecrets News, 28 Oct. 2020, www.opensecrets.org/news/2020/10/cost-of-2020-election-14billion-update/.

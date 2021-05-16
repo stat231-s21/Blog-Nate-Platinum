@@ -1,5 +1,5 @@
 ---
-title: "Presidential Election Finance Data"
+title: "2020 Presidential Election Finances"
 author: "Sarah Edelson"
 output:
   prettydoc::html_pretty:

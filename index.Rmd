@@ -183,9 +183,9 @@ ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=contribution/1000
 
 This bar graph illustrates the total number of individual contributions, in millions, broken down by different expenditure thresholds for both Donald Trump and Joe Biden. 
 
-- For both candidates, the most contributions were made in the $200 and under category.
-- Joe Biden received the most total donations for four of the five spending brackets.
-- Donald Trump garnered more contributions only in the \$200.01 to \$499.99 range.
+- For both candidates, the most money was made in the $200 and under category.
+- Joe Biden received the most money for four of the five spending brackets.
+- Donald Trump garnered more money only in the \$200.01 to \$499.99 range.
 
 The limitation of this bar graph is that it does not tell us the number of donations made for each candidate. It is quite plausible that Trump had more donors than Biden in certain brackets, but these donors gave at the lower bound of the range, resulting in a lower overall total. I would be interested in acquiring data that show the number and exact value of each individual donation within specific spending ranges.
 

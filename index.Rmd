@@ -98,9 +98,9 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
   geom_nodelabel(data = filter(expenditures_network, name == "Joe Biden"), aes(label = name), color = "blue", size = 14) +
   theme_blank() +
   scale_color_manual(values=c("red2", "slategray")) +
-  labs(size = "Contribution Size (millions)") +
+  labs(size = "Contribution Size (millions of $)") +
   labs(color = "Support or Oppose Candidate") +
-  ggtitle("Independent Expenditures Over 10 million") +
+  ggtitle("Independent Expenditures Over $10 million") +
   theme(plot.title = element_text(size = 40)) +
   theme(legend.title = element_text(size = 40)) +
   theme(legend.text = element_text(size = 40)) +
@@ -171,7 +171,7 @@ ggplot(data = contribution_breakdown_clean, aes(x=candidate, y=contribution/1000
   facet_wrap(~category_level) +
   geom_bar(stat="identity") +
   scale_fill_manual(values = c("#a62c2b", "#4682B4")) +
-  ylab("Contribution (Millions)") +
+  ylab("Contribution (Millions of $)") +
   xlab("") +
   theme(legend.position = "none") +
   theme(strip.text.x = element_text(size = 12)) +

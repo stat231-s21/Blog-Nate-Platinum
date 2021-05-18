@@ -126,7 +126,7 @@ independent_expenditures %>%
 
 Besides PACs and Super PACs, a significant portion of campaign spending comes from individual contributions. Which candidates amassed the most support from the general public, and which states had the largest total individual contributions?
 
-![This is a static image of the interactive map, outining total individual contributions by state for different candidates. The map was created using the "IndividualContributions.csv" dataset, which I converted to a long format so that each observation included the state, state contribution, and candidate. ](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/MapImage.png)
+![This is a static image of the interactive map, outining total individual contributions by state for different candidates. The map was created using the individual contributions dataset, which I converted to a long format so that each observation included the state, state contribution, and candidate. ](https://raw.githubusercontent.com/stat231-s21/Blog-Nate-Platinum/main/images/MapImage.png)
 
 Click [here](http://sedelson31.shinyapps.io/IndividualContributionsMap) to view the interactive map.
 

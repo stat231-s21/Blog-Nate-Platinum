@@ -48,7 +48,7 @@ independent_expenditures <- independent_expenditures %>%
          str_detect(candidate_name, "YANG, ANDREW MR.") ~ "Andrew Yang"
          )))
   
-
+# Format names to make them show up better on the network
 independent_expenditures_large <- independent_expenditures %>%
   mutate(committee_cleaned = (case_when(
          str_detect(committee_name, "DEFENDING DEMOCRACY TOGETHER") ~ (paste("DEFENDING", "DEMOCRACY", "TOGETHER", sep="\n")),
@@ -104,8 +104,10 @@ ggplot(data = expenditures_network, aes(x = x, y = y, xend = xend, yend = yend))
 
 The network indicates that:
 
-- The largest donors were skewed more towards Biden then Trump. Biden received support from six organizations, while Trump received support from two. Five organizations opposed Biden while six opposed Trump. 
+- The largest donors were skewed more towards Biden then Trump. Biden received support from six organizations, while Trump received support from two. Five organizations opposed Biden while six opposed Trump.
+
 - Two organizations spent money supporting one candidate and opposing the other: the **FF Pac** and **Priorities USA Action** made expenditures supporting Joe Biden and opposing Donald Trump.
+
 - Candidate priorities align with donors. Conservatives have historically been large advocates for gun rights, explaining why the **NRA Victory Fund** would oppose Biden. Democrats are more invested in combating problems pertaining to climate change and environmental justice, leading the **NextGen Climate Action Committee** to support Biden.
 
 Moving forward, it would be interesting to examine how the number of PACs/organizations and their missions differ at different levels of expenditures.
@@ -139,7 +141,7 @@ The map shows that:
 
 - Certain candidates who lost in the primaries tended to receive most of their contributions from the states which they have served. For example, Kamala Harris was a California senator and acquired most of her donations from that state. Amy Klobuchar received the most contributions from Minnesota, where she was a senator. Massachusetts senator Elizabeth Warren also obtained a majority of her contributions from her home state.
 
-This map only conveys totals for each state, but I would be interested in further analyzing the average contribution across states, or even more specific municipal levels, in addition to other demographic factors influencing donations. For example, we could test the belief that lower-income, people residing in rural areas tend to support Trump by examining where many of the people that donated up to $20 lived. 
+This map only conveys totals for each state, but I would be interested in further analyzing the average contribution across states, or even more specific municipal levels, in addition to other demographic factors influencing donations. For example, we could test the belief that lower-income people residing in rural areas tend to support Trump by examining where many of the people that donated up to $20 lived. 
 
 [This](https://www.nytimes.com/interactive/2020/09/02/upshot/america-political-spectrum.html) New York Times Upshot article called _"The True Colors of America's Political Spectrum Are Gray and Green"_ examines how satellite images of the United States tend to be accurate indicators of voting patterns. In the 2016 election, places with more greenery (often rural areas) leaned towards Trump, while places with more gray in the satellite images (indicating roads and buildings) leaned towards Clinton. An extension of this project could be examining how the average number and value of expenditures for each candidate varies across the satellite image color spectrum.
 
@@ -147,6 +149,7 @@ This map only conveys totals for each state, but I would be interested in furthe
 ```{r fig.width = 15, fig.height = 8, message = FALSE, echo=FALSE}
 contribution_breakdown <- read_csv(here("Data", "ContributionBreakdown.csv"))
 
+# Filter out candidates that are not Biden or Trump
 contribution_breakdown_clean <- contribution_breakdown %>%
   pivot_longer(!Candidate, names_to = "Category", values_to = "Contribution") %>%
   janitor::clean_names() %>%

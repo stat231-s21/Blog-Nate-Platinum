@@ -186,7 +186,7 @@ This bar graph illustrates the total number of individual contributions, in mill
 
 The limitation of this bar graph is that it does not tell us the number of donations made for each candidate. It is quite plausible that Trump had more donors than Biden in certain brackets, but these donors gave at the lower bound of the range, resulting in a lower overall total. I would be interested in acquiring data that show the number and exact value of each individual donation within specific spending ranges.
 
-### Donations from UMass Employees (who live in Amherst) to Main Candidates
+## Donations from UMass Employees (who live in Amherst) to Main Candidates
 
 ```{r, warning = FALSE, message = FALSE, echo=FALSE, fig.width = 15, fig.height = 8}
 amherst_donations <- read_csv(here("Data", "AmherstDonations.csv"))
@@ -226,10 +226,10 @@ This scatter plot shows all 2019-2020 donations made by individuals who are UMas
 
 
 
-### Conclusion
+## Conclusion
 This project explores 2020 election finance information at many levels, examining expenditures on both a macro and micro scale. The network and table convey information about expenditures by PACs and Super PACS, the map shows aggregated individual contributions by state, and the scatter plots display individual contributions from UMass employees who live in Amherst. While many people believe that large organizations and Super PACs comprise the majority of campaign spending, in reality, individual contributions are the most important. In the 2020 election, 8.13% of funds were from PACs and organizations and 13.01% were from self-funding, while 63.93% were from individual donations (with the last 14.93% labeled as "other"). Ultimately, it is important to recognize the critical role that the general public has in the electoral process, not only from a voting perspective, but from a spending perspective.
 
-### Citations
+## Citations
 - “2020 Election to Cost $14 Billion, Blowing Away Spending Records.” OpenSecrets News, 28 Oct. 2020, www.opensecrets.org/news/2020/10/cost-of-2020-election-14billion-update/.
 - “2020 Election United States President.” FEC.gov, www.fec.gov/data/elections/president/2020/.
 - “Browse Individual Contributions.” FEC.gov, www.fec.gov/data/receipts/individual-contributions/?recipient_committee_type=P&amp;contributor_zip=01002&amp;contributor_city=Amherst&amp;two_year_transaction_period=2020. 
